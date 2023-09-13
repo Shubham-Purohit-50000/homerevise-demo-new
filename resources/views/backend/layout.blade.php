@@ -181,18 +181,18 @@
                         <li class="sidebar-item d-none"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
                                     class="hide-menu">Dashboard</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/user')}}" aria-expanded="false"><i
-                                    class="mdi mdi-account-network"></i><span class="hide-menu">Users</span></a></li>
+                                    class="mdi mdi-account-network"></i><span class="hide-menu">Users</span></a></li> -->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/states')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
                                     class="hide-menu">All State</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                        <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/boards')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
                                     class="hide-menu">All Boards</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/medium')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
-                                    class="hide-menu">All Mediums</span></a></li>
+                                    class="hide-menu">All Mediums</span></a></li> -->
                         <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/plans')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
                                     class="hide-menu">All Plan</span></a></li> -->
