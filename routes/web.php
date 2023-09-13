@@ -2,6 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StateController;
+use App\Http\Controllers\BoardController;
+use App\Http\Controllers\MediumController;
+use App\Http\Controllers\StandardController;
+use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\TopicController;
+use App\Http\Controllers\SubtopicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,34 +24,22 @@ use App\Http\Controllers\AdminController;
 
 Route::get('admin/login', [AdminController::class, 'login']);
 Route::post('admin/login', [AdminController::class, 'postLogin']);
-Route::group(['middleware' => 'is_admin'], function () {
-    Route::get('admin', function () {
+Route::group(['middleware' => 'is_admin', 'prefix' => 'admin'], function () {
+    Route::get('/', function () {
         return view('backend.dashboard');
     });
-    
-    Route::get('admin/user', [AdminController::class, 'userList']);
-    Route::get('admin/create/user', [AdminController::class, 'createUser']);
-    Route::get('admin/plans', [AdminController::class, 'plans']);
-    Route::get('admin/create/plan', [AdminController::class, 'createPlan']);
-    Route::get('admin/states', [AdminController::class, 'states']);
-    Route::get('admin/create/state', [AdminController::class, 'createState']);
-    Route::get('admin/boards', [AdminController::class, 'boards']);
-    Route::get('admin/create/boards', [AdminController::class, 'createBoard']);
-    Route::get('admin/medium', [AdminController::class, 'medium']);
-    Route::get('admin/create/medium', [AdminController::class, 'createMedium']);
-    Route::get('admin/request_session', [AdminController::class, 'requestSession']);
-    Route::get('admin/quizes', [AdminController::class, 'quizedList']);
-    Route::get('admin/create/quiz', [AdminController::class, 'quizCreate']);
-    Route::get('admin/journels', [AdminController::class, 'journelsList']);
-    Route::get('admin/create/journel', [AdminController::class, 'createJournel']);
-    Route::get('admin/request_counselling', [AdminController::class, 'requestCounselling']);
-    Route::get('admin/therapy_intake', [AdminController::class, 'therapyIntake']);
-    Route::get('admin/counsellors', [AdminController::class, 'counsellorList']);
-    Route::get('admin/transactions', [AdminController::class, 'transactions']);
+
+    Route::resource('states', StateController::class);
+    Route::resource('boards', BoardController::class);
+    Route::resource('mediums', MediumController::class);
+    Route::resource('standards', StandardController::class);
+    Route::resource('subjects', SubjectController::class);
+    Route::resource('chapters', ChapterController::class);
+    Route::resource('topics', TopicController::class);
+    Route::resource('subtopics', SubtopicController::class);
 
     Route::get('admin/logout', [AdminController::class, 'logout']);
 });
-
 
 
 
