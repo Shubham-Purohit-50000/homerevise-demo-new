@@ -79,6 +79,27 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="primary_key">Primary Key</label>
+                                <input type="text" name="primary_key" class="form-control" id="primary_key">
+                                @error('primary_key')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="secondary_key">Secondary key</label>
+                                <input type="text" name="secondary_key" class="form-control" id="secondary_key">
+                                @error('secondary_key')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="file_name">File Name</label>
+                                <input type="text" name="file_name" class="form-control" id="file_name">
+                                @error('file_name')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <button type="submit" class="btn btn btn-success text-white">Submit</button>
                             </div>
                         </form>

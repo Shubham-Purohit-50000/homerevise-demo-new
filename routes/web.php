@@ -10,6 +10,9 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SubtopicController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +40,13 @@ Route::group(['middleware' => 'is_admin', 'prefix' => 'admin'], function () {
     Route::resource('chapters', ChapterController::class);
     Route::resource('topics', TopicController::class);
     Route::resource('subtopics', SubtopicController::class);
+    Route::resource('courses', CourseController::class);
+    Route::resource('users', UserController::class);
+    Route::get('add/user/key/{user}', [UserController::class, 'addKey']);
+    Route::post('add/user/key/{user}', [UserController::class, 'submitKey']);
+    Route::get('courses/create/{type}/{id}', [CourseController::class, 'create']);
+    Route::get('course/activation/{course}', [CourseController::class, 'showActivation']);
+    Route::delete('activation/key/delete/{id}', [CourseController::class, 'deleteActivation']);
 
     Route::get('admin/logout', [AdminController::class, 'logout']);
 });

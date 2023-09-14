@@ -17,19 +17,19 @@
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Create Topic</h4>
+                <h4 class="page-title">Create User</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Topic</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">create-topic</li>
+                            <li class="breadcrumb-item"><a href="#">User</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">user-borad</li>
                         </ol>
                     </nav>
                 </div>
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
-                    <a href="{{url('admin/topics')}}" class="btn btn-danger text-white">Topic List</a>
+                    <a href="{{url('admin/users')}}" class="btn btn-danger text-white">User List</a>
                 </div>
             </div>
         </div>
@@ -50,52 +50,41 @@
         
                     </div>
                     <div class="px-4 pb-4">
-                        <h3 class="mb-3">Topic Form</h3>
-                        <form action="{{url('admin/topics')}}" method="POST">
+                        <h3 class="mb-3">User Form</h3>
+                        <form action="{{url('admin/users')}}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="chapter">Select Chapter</label>
-                                <select name="chapter_id" id="chapter" class="form-control">
-                                    @foreach ($chapters as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach 
-                                </select>
-                                @error('chapter_id')
-                                    <span class="text-danger">Please select chapter</span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="name">Topic Heading</label>
-                                <input type="text" name="heading" class="form-control" id="name">
-                                @error('heading')
+                                <label for="name">User Name</label>
+                                <input type="text" name="name" class="form-control" id="name" >
+                                @error('name')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="name">Topic Body</label>
-                                <textarea name="body" class="form-control" id="body" cols="30" rows="10"></textarea>
-                                @error('body')
+                                <label for="phone">User Phone</label>
+                                <input type="number" name="phone" class="form-control" id="phone" >
+                                @error('phone')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="primary_key">Primary Key</label>
-                                <input type="text" name="primary_key" class="form-control" id="primary_key">
-                                @error('primary_key')
+                                <label for="phone">User Email</label>
+                                <input type="email" name="email" class="form-control" id="email" >
+                                @error('email')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="secondary_key">Secondary key</label>
-                                <input type="text" name="secondary_key" class="form-control" id="secondary_key">
-                                @error('secondary_key')
+                                <label for="password">User Password</label>
+                                <input type="password" name="password" class="form-control" id="password" >
+                                @error('password')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="file_name">File Name</label>
-                                <input type="text" name="file_name" class="form-control" id="file_name">
-                                @error('file_name')
+                                <label for="activation_key">Course Activation Key</label>
+                                <input type="text" name="activation_key" class="form-control" id="activation_key" >
+                                @error('activation_key')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>

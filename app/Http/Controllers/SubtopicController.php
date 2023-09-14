@@ -26,6 +26,9 @@ class SubtopicController extends Controller
             'heading' => 'required',
             'body' => 'required',
             'topic_id' => 'required|exists:topics,id',
+            'primary_key' => 'required|string|max:250',
+            'secondary_key' => 'required|string|max:250',
+            'file_name' => 'required|string|max:250',
         ]);
 
         Subtopic::create($validatedData);
@@ -46,6 +49,9 @@ class SubtopicController extends Controller
             'heading' => 'required',
             'body' => 'required',
             'topic_id' => 'required|exists:topics,id',
+            'primary_key' => 'required|string|max:250',
+            'secondary_key' => 'required|string|max:250',
+            'file_name' => 'required|string|max:250',
         ]);
 
         $subtopic->update($validatedData);
