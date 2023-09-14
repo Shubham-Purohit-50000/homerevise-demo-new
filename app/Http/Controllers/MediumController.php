@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medium;
+use App\Models\Board;
 use Illuminate\Http\Request;
 
 class MediumController extends Controller
@@ -15,7 +16,8 @@ class MediumController extends Controller
 
     public function create()
     {
-        return view('mediums.create');
+        $boards = Board::all();
+        return view('mediums.create', compact('boards'));
     }
 
     public function store(Request $request)
@@ -33,7 +35,8 @@ class MediumController extends Controller
 
     public function edit(Medium $medium)
     {
-        return view('mediums.edit', compact('medium'));
+        $boards = Board::all();
+        return view('mediums.edit', compact('medium'), compact('boards'));
     }
 
     public function update(Request $request, Medium $medium)

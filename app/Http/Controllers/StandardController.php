@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Medium;
 use App\Models\Standard;
 use Illuminate\Http\Request;
 
@@ -9,13 +10,14 @@ class StandardController extends Controller
 {
     public function index()
     {
-        $mediums = Standard::with('medium')->get();
+        $standards = Standard::with('medium')->get();
         return view('standards.index', compact('standards'));
     }
 
     public function create()
     {
-        return view('standards.create');
+        $mediums = Medium::all();
+        return view('standards.create', compact('mediums'));
     }
 
     public function store(Request $request)
@@ -33,7 +35,8 @@ class StandardController extends Controller
 
     public function edit(Standard $standard)
     {
-        return view('mediums.edit', compact('standard'));
+        $mediums = Medium::all();
+        return view('standards.edit', compact('standard'), compact('mediums'));
     }
 
     public function update(Request $request, Standard $standard)
@@ -53,7 +56,7 @@ class StandardController extends Controller
     {
         $medium->delete();
 
-        return redirect()->route('mediums.index')
-            ->with('success', 'Medium deleted successfully');
+        return redirect()->route('standards.index')
+            ->with('success', 'Standard deleted successfully');
     }
 }

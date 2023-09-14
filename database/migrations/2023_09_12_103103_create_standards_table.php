@@ -43,12 +43,20 @@ class CreateStandardsTable extends Migration
             $table->foreign('medium_id')->references('id')->on('mediums');
         });
 
-        Schema::create('chapters', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('standard_id');
             $table->timestamps();
             $table->foreign('standard_id')->references('id')->on('standards');
+        });
+
+        Schema::create('chapters', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->unsignedBigInteger('subject_id');
+            $table->timestamps();
+            $table->foreign('subject_id')->references('id')->on('subjects');
         });
 
         Schema::create('topics', function (Blueprint $table) {

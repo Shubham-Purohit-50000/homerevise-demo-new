@@ -9,6 +9,8 @@ class Medium extends Model
 {
     use HasFactory;
 
+    protected $table="mediums";
+
     protected $fillable = ['name', 'board_id'];
 
     public function board()

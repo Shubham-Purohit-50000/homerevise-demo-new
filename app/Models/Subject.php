@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model
 {
-    use HasFactory;
+    protected $table="subjects";
+
+    protected $fillable = ['name', 'standard_id'];
+
+    public function standard()
+    {
+        return $this->belongsTo(Standard::class);
+    }
 }
