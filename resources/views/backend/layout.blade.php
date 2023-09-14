@@ -186,7 +186,28 @@
                                     class="mdi mdi-account-network"></i><span class="hide-menu">Users</span></a></li> -->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/states')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
-                                    class="hide-menu">All State</span></a></li>
+                                    class="hide-menu">States</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/boards')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                    class="hide-menu">Boards</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/mediums')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                    class="hide-menu">Mediums</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/standards')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                    class="hide-menu">Standards</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/subjects')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                    class="hide-menu">Subjects</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/chapters')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                    class="hide-menu">Chapters</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/topics')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                    class="hide-menu">Topics</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/subtopics')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                    class="hide-menu">SubTopics</span></a></li>
                         <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/boards')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
                                     class="hide-menu">All Boards</span></a></li>

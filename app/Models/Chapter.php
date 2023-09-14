@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chapter extends Model
 {
-    use HasFactory;
+    protected $table="chapters";
+
+    protected $fillable = ['name', 'subject_id'];
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }

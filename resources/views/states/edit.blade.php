@@ -57,6 +57,9 @@
                             <div class="form-group">
                                 <label for="name">State Name</label>
                                 <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="{{$state->name}}">
+                                @error('name')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn btn-success text-white">Submit</button>

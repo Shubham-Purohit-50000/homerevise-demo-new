@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Board;
+use App\Models\Board;
+use App\Models\State;
 use Illuminate\Http\Request;
 
 class BoardController extends Controller
@@ -11,13 +12,14 @@ class BoardController extends Controller
 
     public function index()
     {
-        $boards = Board::all();
+        $boards = Board::with('state')->get();
         return view('boards.index', compact('boards'));
     }
 
     public function create()
     {
-        return view('boards.create');
+        $states = State::all();
+        return view('boards.create', compact('states'));
     }
 
     public function store(Request $request)
@@ -29,12 +31,14 @@ class BoardController extends Controller
 
         Board::create($validatedData);
 
-        return redirect()->route('boards.index');
+        return redirect()->route('boards.index')
+        ->with('success', 'Board created successfully.');
     }
 
     public function edit(Board $board)
     {
-        return view('boards.edit', compact('board'));
+        $states = State::all();
+        return view('boards.edit', compact('board'), compact('states'));
     }
 
     public function update(Request $request, Board $board)
@@ -46,7 +50,8 @@ class BoardController extends Controller
 
         $board->update($validatedData);
 
-        return redirect()->route('boards.index');
+        return redirect()->route('boards.index')
+        ->with('success', 'Board Updated successfully.');
     }
 
     public function destroy(Board $board)

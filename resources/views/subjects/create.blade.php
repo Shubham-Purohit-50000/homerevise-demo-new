@@ -17,19 +17,19 @@
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Create State</h4>
+                <h4 class="page-title">Create Subject</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">State</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">create-state</li>
+                            <li class="breadcrumb-item"><a href="#">Subject</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">create-subject</li>
                         </ol>
                     </nav>
                 </div>
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
-                    <a href="{{url('admin/states')}}" class="btn btn-danger text-white">State List</a>
+                    <a href="{{url('admin/standards')}}" class="btn btn-danger text-white">Subjects List</a>
                 </div>
             </div>
         </div>
@@ -50,12 +50,23 @@
         
                     </div>
                     <div class="px-4 pb-4">
-                        <h3 class="mb-3">State Form</h3>
-                        <form action="{{url('admin/states')}}" method="POST">
+                        <h3 class="mb-3">Subject Form</h3>
+                        <form action="{{url('admin/subjects')}}" method="POST">
                             @csrf
                             <div class="form-group">
-                                <label for="">State Name</label>
-                                <input type="text" name="name" class="form-control" id="" placeholder="Enter Name">
+                                <label for="standard">Select Standard</label>
+                                <select name="standard_id" id="standard" class="form-control">
+                                    @foreach ($standards as $item)
+                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach 
+                                </select>
+                                @error('standard_id')
+                                    <span class="text-danger">Please select Medium</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="name">Subect Name</label>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name">
                                 @error('name')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
