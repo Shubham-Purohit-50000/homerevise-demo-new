@@ -208,6 +208,12 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/subtopics')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
                                     class="hide-menu">SubTopics</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/courses')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                    class="hide-menu">Courses</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/users')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                    class="hide-menu">Users</span></a></li>
                         <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/boards')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
                                     class="hide-menu">All Boards</span></a></li>

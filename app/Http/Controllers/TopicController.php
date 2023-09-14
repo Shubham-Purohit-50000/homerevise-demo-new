@@ -26,6 +26,9 @@ class TopicController extends Controller
             'heading' => 'required',
             'body' => 'required',
             'chapter_id' => 'required|exists:chapters,id',
+            'primary_key' => 'required|string|max:250',
+            'secondary_key' => 'required|string|max:250',
+            'file_name' => 'required|string|max:250',
         ]);
 
         Topic::create($validatedData);
@@ -46,6 +49,9 @@ class TopicController extends Controller
             'heading' => 'required',
             'body' => 'required',
             'chapter_id' => 'required|exists:chapters,id',
+            'primary_key' => 'required|string|max:250',
+            'secondary_key' => 'required|string|max:250',
+            'file_name' => 'required|string|max:250',
         ]);
 
         $topic->update($validatedData);

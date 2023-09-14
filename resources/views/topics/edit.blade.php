@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Topic Heading</label>
-                                <input type="text" name="heading" class="form-control" id="name" placeholder="Enter Name" value="{{$topic->heading}}">
+                                <input type="text" name="heading" class="form-control" id="name" value="{{$topic->heading}}">
                                 @error('heading')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -77,6 +77,27 @@
                                 <label for="name">Topic Body</label>
                                 <textarea name="body" class="form-control" id="body" cols="30" rows="10">{{$topic->body}}</textarea>
                                 @error('body')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="primary_key">Primary Key</label>
+                                <input type="text" name="primary_key" class="form-control" id="primary_key" value="{{$topic->primary_key}}">
+                                @error('primary_key')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="secondary_key">Secondary key</label>
+                                <input type="text" name="secondary_key" class="form-control" id="secondary_key" value="{{$topic->secondary_key}}">
+                                @error('secondary_key')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="file_name">File Name</label>
+                                <input type="text" name="file_name" class="form-control" id="file_name" value="{{$topic->file_name}}">
+                                @error('file_name')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>

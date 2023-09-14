@@ -9,19 +9,14 @@
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Stnadard List</h4>
+                <h4 class="page-title">Activation Courses List</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Standards</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">standard-list</li>
+                            <li class="breadcrumb-item"><a href="#">Course/Activations</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">course-activation-list</li>
                         </ol>
                     </nav>
-                </div>
-            </div>
-            <div class="col-7">
-                <div class="text-end upgrade-btn">
-                    <a href="{{url('admin/standards/create')}}" class="btn btn-danger text-white">+ Create Standard</a>
                 </div>
             </div>
         </div>
@@ -29,6 +24,7 @@
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
+
     <!-- ============================================================== -->
     <!-- Container fluid  -->
     <!-- ============================================================== -->
@@ -42,8 +38,7 @@
                         <!-- title -->
                         <div class="d-md-flex">
                             <div>
-                                <h4 class="card-title">All Standard List</h4>
-                                <h5 class="card-subtitle">Overview of all standards</h5>
+                                <h4 class="card-title">All Courses-User-Activation List</h4>
                             </div>
                         </div>
                         <!-- title -->
@@ -53,32 +48,34 @@
                             <thead>
                                 <tr class="bg-light">
                                     <th class="border-top-0">#ID</th>
-                                    <th class="border-top-0">State</th>
-                                    <th class="border-top-0">Board</th>
-                                    <th class="border-top-0">Medium</th>
-                                    <th class="border-top-0">Standard</th>
+                                    <th class="border-top-0">Name</th>
+                                    <th class="border-top-0">Activation Key</th>
+                                    <th class="border-top-0">User Name</th>
+                                    <th class="border-top-0">Email</th>
+                                    <th class="border-top-0">Phone</th>
                                     <th class="border-top-0">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($standards as $item)
+                                @forelse ($course->activation as $item)
                                 <tr>
                                     <td>{{$item->id}}</td>
-                                    <td>{{$item->medium->board->state->name}}</td>
-                                    <td>{{$item->medium->board->name}}</td>
-                                    <td>{{$item->medium->name}}</td>
-                                    <td>{{$item->name}}</td>
+                                    <td>{{$course->name}}</td>
+                                    <td>{{$item->activation_key}}</td>
+                                    <td>{{$item->user->name ?? '--'}}</td>
+                                    <td>{{$item->user->email ?? '--'}}</td>
+                                    <td>{{$item->user->phone ?? '--'}}</td>
                                     <td>
-                                        <a href="{{url('admin/courses/create', ['type' => 'standard', 'standard_id' => $item->id])}}"><button class="btn btn-sm btn-success"><span class="mdi mdi-plus"></span> Add Course</button></a>
-                                        <a href="{{route('standards.edit', ['standard'=>$item->id])}}"><button class="btn btn-sm btn-info"><span class="mdi mdi-pen"></span> Edit</button></a>
-                                        <form action="{{ route('standards.destroy', ['standard' => $item->id]) }}" method="POST" class="d-inline">
+                                        <form action="{{ url('admin/activation/key/delete', ['activation' => $item->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger text-white"><span class="mdi mdi-delete-empty"></span> Delete</button>
                                         </form>
                                     </td>
                                 </tr>
-                                @endforeach
+                                @empty
+                                    <li>No items found</li>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -87,6 +84,5 @@
         </div>
         
     </div>
-    
 </div>
 @endsection

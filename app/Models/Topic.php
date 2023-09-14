@@ -9,7 +9,7 @@ class Topic extends Model
 {
     protected $table="topics";
 
-    protected $fillable = ['heading', 'body', 'chapter_id'];
+    protected $fillable = ['heading', 'body', 'chapter_id', 'primary_key', 'secondary_key', 'file_name'];
 
     public function chapter()
     {
