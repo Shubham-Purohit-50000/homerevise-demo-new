@@ -15,4 +15,9 @@ class Topic extends Model
     {
         return $this->belongsTo(Chapter::class);
     }
+
+    public function subtopics()
+    {
+        return $this->hasMany(Subtopic::class);
+    }
 }
