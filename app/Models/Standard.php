@@ -13,4 +13,9 @@ class Standard extends Model
     {
         return $this->belongsTo(Medium::class);
     }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class);
+    }
 }

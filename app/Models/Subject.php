@@ -15,4 +15,9 @@ class Subject extends Model
     {
         return $this->belongsTo(Standard::class);
     }
+
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class);
+    }
 }

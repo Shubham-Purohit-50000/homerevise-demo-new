@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\API\CourseManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,13 +22,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::controller(RegisterController::class)->group(function(){
     Route::post('register', 'register');
-    Route::post('verify', 'verify');
     Route::post('login', 'login');
 });
         
 Route::middleware('auth:sanctum')->group( function () {
-    //Route::resource('products', ProductController::class);
     Route::get('name', function(){
         return auth()->user()->email;
     });
+    Route::get('user', function(){
+        return auth()->user();
+    });
+    Route::get('user/course/details', [CourseManagementController::class, 'course']);
 });
+
+//for unauthorize user
+Route::get('/login', function () {
+    return response()->json(['message' => 'Unauthorized. Please check your token.'], 401);
+})->name('login');

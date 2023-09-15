@@ -34,8 +34,13 @@ class UserController extends Controller
 
         $user = User::create($data);
         $activation = Activation::where('activation_key', $request->activation_key)->first();
-        $activation->user_id = $user->id;
-        $activation->save();
+        if($activation->user_id == null){
+            $activation->user_id = $user->id;
+            $activation->save();
+        }else{
+            return redirect()->route('users.index')->with('error', 'This activation key is already in use, please asign a new key to this user');
+        }
+        
 
         return redirect()->route('users.index')->with('success', 'User created successfully');
     }

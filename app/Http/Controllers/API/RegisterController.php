@@ -10,6 +10,7 @@ use Validator;
 use Hash;
 use Exception;
 use Twilio\Rest\Client;
+use App\Models\Activation;
    
 class RegisterController extends BaseController
 {
@@ -24,77 +25,30 @@ class RegisterController extends BaseController
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'country_code' => ['required'],
-            'phone_number' => ['required', 'numeric', 'unique:users'],
-            'confirm_password' => 'required|same:password',
-            'age' => ['required', 'numeric'],
+            'phone' => ['required', 'numeric', 'unique:users'],
+            'activation_key' => 'required|exists:activations,activation_key',
         ]);
    
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+            return $this->sendError('Validation Error.', $validator->errors(), 403);
         }
 
         $input = $request->all();
-        $phone_number = $input['country_code'].$input['phone_number'];
-
         //return response()->json($phone_number);
         
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
 
-        $success['name'] =  $input['name'];
-        return $this->sendResponse($success, 'Registration successfully.');
-    }
-
-    /** verfiy */
-    protected function verify(Request $request)
-    {
-        $data = $request->validate([
-            'verification_code' => ['required', 'numeric'],
-            'phone_number' => ['required', 'string'],
-        ]);
-
-        $user = User::where('phone_number', $data['phone_number'])->first();
-        return response()->json($user);
-
-        if($user->phone_otp == $data['verification_code']){
-            $user = tap(User::where('phone_number', $data['phone_number']))->update(['isVerified' => true]);
-            /* Authenticate user */
-            Auth::login($user->first());
-            return $this->sendResponse(null, 'User verfication successfully.');
+        $activation = Activation::where('activation_key', $request->activation_key)->first();
+        if($activation->user_id == null){
+            $activation->user_id = $user->id;
+            $activation->save();
         }else{
-            return $this->sendError('Invalid verification code entered!.', ['error'=>'Unauthorised']);
+            return $this->sendError('Unauthorised.', ['error' => 'This activation key is already in use.'], 401);
         }
 
-
-        // if ($verification->valid) {
-        //     $user = User::where('phone_number', $data['phone_number'])->update(['isVerified' => true]);
-        //     /* Authenticate user */
-        //     Auth::login($user->first());
-        //     $success['message'] = 'Phone number verified';
-        //     // $success['name'] =  $user->name;
-        //     // return redirect()->route('home')->with(['message' => 'Phone number verified']);
-        //     return $this->sendResponse(null, 'OTP sent successfully.');
-        // }
-
-
-        // $token = getenv("TWILIO_AUTH_TOKEN");
-        // $twilio_sid = getenv("TWILIO_SID");
-        // $twilio_verify_sid = getenv("TWILIO_VERIFY_SID");
-        // $twilio = new Client($twilio_sid, $token);
-        // $verification = $twilio->verify->v2->services($twilio_verify_sid)
-        //     ->verificationChecks
-        //     ->create($data['verification_code'], array('to' => $data['phone_number']));
-        // if ($verification->valid) {
-        //     $user = tap(User::where('phone_number', $data['phone_number']))->update(['isVerified' => true]);
-        //     /* Authenticate user */
-        //     Auth::login($user->first());
-        //     $success['message'] = 'Phone number verified';
-        //     // $success['name'] =  $user->name;
-        //     // return redirect()->route('home')->with(['message' => 'Phone number verified']);
-        //     return $this->sendResponse(null, 'OTP sent successfully.');
-        // }
-        // return $this->sendError('Invalid verification code entered!.', ['error'=>'Unauthorised']);
+        $success['name'] =  $input['name'];
+        return $this->sendResponse($success, 'Registration successfully.');
     }
 
     protected function username()
