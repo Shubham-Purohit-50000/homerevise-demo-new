@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\User;
 use Auth;
+use Hash;
 
 class AdminController extends Controller
 {
@@ -25,11 +26,11 @@ class AdminController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect()->intended('admin')
+            return redirect()->intended('admin/dashboard')
                         ->withSuccess('You have Successfully loggedin');
         }
   
-        return redirect("admin/login")->with('error','Oppes! You have entered invalid credentials');
+        return redirect("/")->with('error','Oppes! You have entered invalid credentials');
     }
 
     public function dashboard(){
