@@ -25,10 +25,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('admin/login', [AdminController::class, 'login']);
+Route::get('/', [AdminController::class, 'login']);
 Route::post('admin/login', [AdminController::class, 'postLogin']);
 Route::group(['middleware' => 'is_admin', 'prefix' => 'admin'], function () {
-    Route::get('/', function () {
+    Route::get('dashboard', function () {
         return view('backend.dashboard');
     });
 
