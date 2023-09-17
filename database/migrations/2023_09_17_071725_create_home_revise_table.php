@@ -109,7 +109,7 @@ return new class extends Migration
             $table->string('primary_key', 250);
             $table->string('secondary_key', 250);
             $table->string('file_name', 250);
-            $table->string('folder_name', 250);
+            $table->string('folder_name', 250)->nullable();
             $table->timestamps();
         });
 
@@ -122,7 +122,7 @@ return new class extends Migration
             $table->string('primary_key', 250);
             $table->string('secondary_key', 250);
             $table->string('file_name', 250);
-            $table->string('folder_name', 250);
+            $table->string('folder_name', 250)->nullable();
         });
 
         Schema::create('courses', function (Blueprint $table) {
@@ -132,7 +132,7 @@ return new class extends Migration
             $table->unsignedBigInteger('subject_id')->nullable()->index('courses_subject_id_foreign');
             $table->integer('duration');
             $table->boolean('status');
-            $table->string('folder_name', 250);
+            $table->string('folder_name', 250)->nullable();
             $table->timestamps();
         });
 
@@ -169,7 +169,7 @@ return new class extends Migration
         });
 
         Schema::table('chapters', function (Blueprint $table) {
-            $table->foreign(['subject_id'], 'chapters_standard_id_foreign')->references(['id'])->on('standards')->onDelete('cascade');
+            $table->foreign(['subject_id'], 'chapters_subject_id_foreign')->references(['id'])->on('subjects')->onDelete('cascade');
         });
 
         Schema::table('courses', function (Blueprint $table) {
