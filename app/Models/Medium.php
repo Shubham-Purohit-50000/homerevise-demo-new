@@ -11,7 +11,7 @@ class Medium extends Model
 
     protected $table="mediums";
 
-    protected $fillable = ['name', 'board_id'];
+    protected $fillable = ['name', 'board_id', 'folder_name'];
 
     public function board()
     {

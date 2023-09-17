@@ -9,5 +9,5 @@ class State extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'folder_name'];
 }

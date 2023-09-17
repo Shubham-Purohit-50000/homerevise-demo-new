@@ -24,6 +24,7 @@ class MediumController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'folder_name' => 'required|string|max:255',
             'board_id' => 'required|exists:boards,id',
         ]);
 

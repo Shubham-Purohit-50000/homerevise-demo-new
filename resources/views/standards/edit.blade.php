@@ -68,7 +68,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Standard Name</label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="{{$standard->name}}">
+                                <input type="text" name="name" class="form-control" id="name" value="{{$standard->name}}">
                                 @error('name')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror

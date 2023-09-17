@@ -29,6 +29,7 @@ class TopicController extends Controller
             'primary_key' => 'required|string|max:250',
             'secondary_key' => 'required|string|max:250',
             'file_name' => 'required|string|max:250',
+            'folder_name' => 'required|string|max:255',
         ]);
 
         Topic::create($validatedData);

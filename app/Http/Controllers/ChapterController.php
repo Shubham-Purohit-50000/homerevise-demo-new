@@ -24,6 +24,7 @@ class ChapterController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'folder_name' => 'required|string|max:255',
             'subject_id' => 'required|exists:subjects,id',
         ]);
 

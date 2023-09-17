@@ -9,7 +9,7 @@ class Subject extends Model
 {
     protected $table="subjects";
 
-    protected $fillable = ['name', 'standard_id'];
+    protected $fillable = ['name', 'standard_id', 'folder_name'];
 
     public function standard()
     {

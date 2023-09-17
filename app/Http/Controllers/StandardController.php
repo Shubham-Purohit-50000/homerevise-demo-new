@@ -24,6 +24,7 @@ class StandardController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'folder_name' => 'required|string|max:255',
             'medium_id' => 'required|exists:mediums,id',
         ]);
 

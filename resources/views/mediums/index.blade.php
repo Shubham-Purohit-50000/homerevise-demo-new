@@ -71,7 +71,7 @@
                                         <form action="{{ route('mediums.destroy', ['medium' => $item->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger text-white"><span class="mdi mdi-delete-empty"></span> Delete</button>
+                                            <button type="submit" class="btn btn-sm btn-danger text-white" onclick="return confirmDelete('On delete this record, All data such as standards, courses, topics etc under this record will be deleted')"><span class="mdi mdi-delete-empty"></span> Delete</button>
                                         </form>
                                     </td>
                                 </tr>

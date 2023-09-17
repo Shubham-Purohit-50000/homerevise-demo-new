@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Standard extends Model
 {
-    protected $fillable = ['name', 'medium_id'];
+    protected $fillable = ['name', 'medium_id', 'folder_name'];
 
     public function medium()
     {

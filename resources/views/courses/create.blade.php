@@ -87,6 +87,13 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="folder_name">Folder Name</label>
+                                <input type="text" name="folder_name" class="form-control" id="folder_name">
+                                @error('folder_name')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <button type="submit" class="btn btn btn-success text-white">Submit</button>
                             </div>
                         </form>

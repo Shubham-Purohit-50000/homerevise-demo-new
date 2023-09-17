@@ -13,6 +13,7 @@ class Course extends Model
         'subject_id',
         'duration',
         'status',
+        'folder_name',
     ];
 
     public function standard()
