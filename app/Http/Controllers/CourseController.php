@@ -34,7 +34,7 @@ class CourseController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'count' => 'required|numeric',
+            'duration' => 'required|numeric',
             'status' => 'required|numeric',
         ]);
 
@@ -43,12 +43,12 @@ class CourseController extends Controller
         for($i = 0; $i < $request->count; $i++){
 
             // Generate a unique 10-digit activation key
-            $activationKey = Str::random(10);
+            $activationKey = 'HR'.generateRandomString(6);
 
             // Check if the generated key already exists in the activations table
             while (Activation::where('activation_key', $activationKey)->exists()) {
                 // If it exists, generate a new key and check again
-                $activationKey = Str::random(10);
+                $activationKey = 'HR'.generateRandomString(6);
             }
 
             Activation::create([

@@ -8,7 +8,7 @@
     <!-- ============================================================== -->
     <div class="page-breadcrumb">
         <div class="row align-items-center">
-            <div class="col-5">
+            <div class="col-4">
                 <h4 class="page-title">Courses List</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
@@ -19,6 +19,19 @@
                     </nav>
                 </div>
             </div>
+            <div class="col-8 d-flex justify-content-end">
+                <div class="text-end upgrade-btn mx-1">
+                    <a href="{{url('admin/standards')}}" class="btn btn-success">+ Create Course For Standard</a>
+                </div>
+                <div class="text-end upgrade-btn mx-1">
+                    <a href="{{url('admin/subjects')}}" class="btn btn-info text-white">+ Create Course For Subject</a>
+                </div>
+            </div>
+            <!-- <div class="col-4">
+                <div class="text-end upgrade-btn">
+                    <a href="{{url('admin/subjects')}}" class="btn btn-danger text-white">+ Create Course For Subject</a>
+                </div>
+            </div> -->
         </div>
     </div>
     <!-- ============================================================== -->
@@ -72,7 +85,7 @@
                                     <td>--</td>
                                     <td>{{$item->name}}</td>
                                     <td>
-                                        <a href="{{url('admin/course/activation', ['course'=>$item->id])}}" class="">{{$item->count}}</a>
+                                        <a href="{{url('admin/course/activation', ['course'=>$item->id])}}" class="">{{$item->activation->count()}}</a>
                                     </td>
                                     <td>
                                         @if ($item->status == 1)
@@ -91,7 +104,7 @@
                                     <td>{{$item->subject->name}}</td>
                                     <td>{{$item->name}}</td>
                                     <td>
-                                        <a href="{{url('admin/course/activation', ['course'=>$item->id])}}" class="">{{$item->count}}</a>
+                                        <a href="{{url('admin/course/activation', ['course'=>$item->id])}}" class="">{{$item->activation->count()}}</a>
                                     </td>
                                     <td>
                                         @if ($item->status == 1)

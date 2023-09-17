@@ -11,7 +11,7 @@ class Course extends Model
         'name',
         'standard_id',
         'subject_id',
-        'count',
+        'duration',
         'status',
     ];
 
