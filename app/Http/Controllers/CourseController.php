@@ -34,6 +34,7 @@ class CourseController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'folder_name' => 'required|string|max:255',
             'duration' => 'required|numeric',
             'count' => 'required|numeric',
             'status' => 'required|numeric',

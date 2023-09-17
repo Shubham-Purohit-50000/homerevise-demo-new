@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Medium Name</label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="{{$medium->name}}">
+                                <input type="text" name="name" class="form-control" id="name"  value="{{$medium->name}}">
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn btn-success text-white">Submit</button>

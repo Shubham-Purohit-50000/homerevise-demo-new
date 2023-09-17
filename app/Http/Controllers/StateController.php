@@ -22,6 +22,7 @@ class StateController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'folder_name' => 'required|string|max:255',
         ]);
 
         State::create($request->all());

@@ -25,7 +25,8 @@ class BoardController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255',
+            'folder_name' => 'required|string|max:255',
             'state_id' => 'required|exists:states,id',
         ]);
 

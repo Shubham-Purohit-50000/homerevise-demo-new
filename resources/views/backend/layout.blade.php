@@ -282,6 +282,10 @@
             @endif
         });
 
+        function confirmDelete(message) {
+            return confirm(message);
+        }
+
     </script>
     
     <script src="{{asset('backend/assets/libs/jquery/dist/jquery.min.js')}}"></script>

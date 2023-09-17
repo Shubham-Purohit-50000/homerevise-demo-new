@@ -66,8 +66,15 @@
                             </div>
                             <div class="form-group">
                                 <label for="name">Standard Name</label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name">
+                                <input type="text" name="name" class="form-control" id="name">
                                 @error('name')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="folder_name">Folder Name</label>
+                                <input type="text" name="folder_name" class="form-control" id="folder_name">
+                                @error('folder_name')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>

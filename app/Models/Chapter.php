@@ -9,7 +9,7 @@ class Chapter extends Model
 {
     protected $table="chapters";
 
-    protected $fillable = ['name', 'subject_id'];
+    protected $fillable = ['name', 'subject_id', 'folder_name'];
 
     public function subject()
     {

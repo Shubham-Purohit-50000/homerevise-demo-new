@@ -24,6 +24,7 @@ class SubjectController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
+            'folder_name' => 'required|string|max:255',
             'standard_id' => 'required|exists:standards,id',
         ]);
 

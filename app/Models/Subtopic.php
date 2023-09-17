@@ -9,7 +9,7 @@ class Subtopic extends Model
 {
     protected $table="subtopics";
 
-    protected $fillable = ['heading', 'body', 'topic_id', 'primary_key', 'secondary_key', 'file_name'];
+    protected $fillable = ['heading', 'body', 'topic_id', 'primary_key', 'secondary_key', 'file_name', 'folder_name'];
 
     public function topic()
     {

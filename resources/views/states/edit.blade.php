@@ -56,7 +56,7 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="name">State Name</label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Enter Name" value="{{$state->name}}">
+                                <input type="text" name="name" class="form-control" id="name" value="{{$state->name}}">
                                 @error('name')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
