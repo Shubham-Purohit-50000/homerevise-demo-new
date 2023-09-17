@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Activation;
 use Illuminate\Http\Request;
 use Hash;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -36,6 +37,7 @@ class UserController extends Controller
         $activation = Activation::where('activation_key', $request->activation_key)->first();
         if($activation->user_id == null){
             $activation->user_id = $user->id;
+            $activation->activation_time = Carbon::now();
             $activation->save();
         }else{
             return redirect()->route('users.index')->with('error', 'This activation key is already in use, please asign a new key to this user');
@@ -73,6 +75,7 @@ class UserController extends Controller
         ]);
         $activation = Activation::where('activation_key', $request->activation_key)->first();
         $activation->user_id = $user->id;
+        $activation->activation_time = Carbon::now();
         $activation->save();
 
         return redirect()->route('users.index')->with('success', 'Course added successfully');

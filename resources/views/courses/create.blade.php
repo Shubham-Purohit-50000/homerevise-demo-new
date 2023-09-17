@@ -70,8 +70,8 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="count">Course Duration (months)</label>
-                                <input type="number" name="count" class="form-control" id="count" min='1' value="1">
+                                <label for="duration">Course Duration (months)</label>
+                                <input type="number" name="duration" class="form-control" id="duration" min='1' value="1">
                                 @error('duration')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
