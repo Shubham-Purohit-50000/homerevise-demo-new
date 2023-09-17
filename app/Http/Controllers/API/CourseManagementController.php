@@ -12,8 +12,18 @@ use App\Models\Activation;
 
 class CourseManagementController extends BaseController
 {
-    public function addKey(){
+    public function addKey(Request $request){
+        $user = auth()->user();
+        $data = $request->validate([
+            'activation_key' => 'required|exists:activations,activation_key',
+        ]);
+        $activation = Activation::where('activation_key', $request->activation_key)->first();
+        $activation->user_id = $user->id;
+        $activation->save();
 
+        $data['status'] = true;
+
+        return $this->sendResponse($data, 'Course activation Key added Successfully.');
     } 
     public function course_old(Request $request){
         $couser = auth()->user()->activation->course;//->standard->subject->chapter->topic;//->with('subtopic');

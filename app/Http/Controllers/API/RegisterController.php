@@ -54,7 +54,7 @@ class RegisterController extends BaseController
     protected function username()
     {
         $loginField = request()->input('login_field');
-        $field = filter_var($loginField, FILTER_VALIDATE_EMAIL) ? 'email' : (is_numeric($loginField) ? 'phone' : 'username');
+        $field = filter_var($loginField, FILTER_VALIDATE_EMAIL) ? 'email' : (is_numeric($loginField) ? 'phone' : 'name');
         request()->merge([$field => $loginField]);
         return $field;
     }
@@ -67,6 +67,16 @@ class RegisterController extends BaseController
 
     public function login(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'login_field' => 'required',
+            'password' => 'required',
+            'device_id' => 'required',
+        ]);
+   
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors(), 403);
+        }
+
         $loginField = $request->input('login_field');
         $credentials = [
             $this->username() => $loginField,
