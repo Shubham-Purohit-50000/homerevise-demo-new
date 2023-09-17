@@ -11,6 +11,7 @@ class Activation extends Model
         'course_id',
         'user_id',
         'activation_key',
+        'activation_time',
     ];
 
     public function course()

@@ -63,8 +63,11 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="count">Number of Activation keys</label>
-                                <input type="number" disabled name="count" class="form-control" id="count" value="{{$course->count}}">
+                                <label for="duration">Course Duration (months)</label>
+                                <input type="number" name="duration" class="form-control" id="duration" min='1' value="{{$course->duration}}">
+                                @error('duration')
+                                    <span class="text-danger">{{$message}}</span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label for="status">Course Status</label>

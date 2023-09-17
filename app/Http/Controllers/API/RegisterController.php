@@ -11,6 +11,7 @@ use Hash;
 use Exception;
 use Twilio\Rest\Client;
 use App\Models\Activation;
+use Carbon\Carbon;
    
 class RegisterController extends BaseController
 {
@@ -42,6 +43,7 @@ class RegisterController extends BaseController
         $activation = Activation::where('activation_key', $request->activation_key)->first();
         if($activation->user_id == null){
             $activation->user_id = $user->id;
+            $activation->activation_time = Carbon::now();
             $activation->save();
         }else{
             return $this->sendError('Unauthorised.', ['error' => 'This activation key is already in use.'], 401);
