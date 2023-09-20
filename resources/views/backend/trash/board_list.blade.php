@@ -9,19 +9,14 @@
     <div class="page-breadcrumb">
         <div class="row align-items-center">
             <div class="col-5">
-                <h4 class="page-title">Dashboard</h4>
+                <h4 class="page-title">Privacy Policy</h4>
                 <div class="d-flex align-items-center">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Plans</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">plan-list</li>
+                            <li class="breadcrumb-item"><a href="#">Privacy Policy</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">privacy-policy</li>
                         </ol>
                     </nav>
-                </div>
-            </div>
-            <div class="col-7">
-                <div class="text-end upgrade-btn">
-                    <a href="{{url('admin/create/plan')}}" class="btn btn-danger text-white" target="_blank">Create Plan</a>
                 </div>
             </div>
         </div>

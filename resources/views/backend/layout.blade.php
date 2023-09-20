@@ -33,6 +33,14 @@
     <!-- JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script> 
 
+    @if(!auth('admin')->check())
+    <style>
+        #main-wrapper[data-layout=vertical][data-sidebartype=full] .page-wrapper{
+            margin-left:0px!important;
+        }
+    </style>
+    @endif
+
 </head>
 
 <body>
@@ -60,21 +68,9 @@
                     <!-- Logo -->
                     <!-- ============================================================== -->
                     <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
-                        <b class="logo-icon">
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
-                            <img src="{{asset('backend/assets/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
-                            <!-- Light Logo icon -->
-                            <img src="{{asset('backend/assets/images/logo-light-icon.png')}}" alt="homepage" class="light-logo" />
-                        </b>
-                        <!--End Logo icon -->
-                        <!-- Logo text -->
                         <span class="logo-text">
-                            <!-- dark Logo text -->
-                            <img src="{{asset('backend/assets/images/logo-text.png')}}" alt="homepage" class="dark-logo" />
                             <!-- Light Logo text -->
-                            <img src="{{asset('backend/assets/images/logo-light-text.png')}}" class="light-logo" alt="homepage" />
+                            <img src="{{asset('images/logo/home_revise.jpeg')}}" class="light-logo" alt="homepage" />
                         </span>
                     </a>
                     <!-- ============================================================== -->
@@ -87,6 +83,7 @@
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
+                @if(auth('admin')->check()) 
                 <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
                     <!-- ============================================================== -->
                     <!-- toggle and nav items -->
@@ -128,6 +125,7 @@
                         <!-- ============================================================== -->
                     </ul>
                 </div>
+                @endif
             </nav>
         </header>
         <!-- ============================================================== -->
@@ -136,6 +134,7 @@
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
+        @if(auth('admin')->check())
         <aside class="left-sidebar" data-sidebarbg="skin6">
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar">
@@ -185,35 +184,38 @@
                                 href="{{url('admin/user')}}" aria-expanded="false"><i
                                     class="mdi mdi-account-network"></i><span class="hide-menu">Users</span></a></li> -->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/states')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                href="{{url('admin/states')}}" aria-expanded="false"><i class="mdi mdi-web"></i><span
                                     class="hide-menu">States</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/boards')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                href="{{url('admin/boards')}}" aria-expanded="false"><i class="mdi mdi-city"></i><span
                                     class="hide-menu">Boards</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/mediums')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                href="{{url('admin/mediums')}}" aria-expanded="false"><i class="mdi mdi-bulletin-board"></i><span
                                     class="hide-menu">Mediums</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/standards')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                href="{{url('admin/standards')}}" aria-expanded="false"><i class="mdi mdi-translate-variant"></i><span
                                     class="hide-menu">Standards</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/subjects')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                href="{{url('admin/subjects')}}" aria-expanded="false"><i class="mdi mdi-layers"></i><span
                                     class="hide-menu">Subjects</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/chapters')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                href="{{url('admin/chapters')}}" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span
                                     class="hide-menu">Chapters</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/topics')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                href="{{url('admin/topics')}}" aria-expanded="false"><i class="mdi mdi-file"></i><span
                                     class="hide-menu">Topics</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/subtopics')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                href="{{url('admin/subtopics')}}" aria-expanded="false"><i class="mdi mdi-newspaper-variant"></i><span
                                     class="hide-menu">SubTopics</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/courses')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
-                                    class="hide-menu">Courses</span></a></li>
+                                href="{{url('admin/courses')}}" aria-expanded="false"><i class="mdi mdi-bag-personal"></i><span
+                                    class="hide-menu">Course Key Generation</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/users')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
+                                href="{{url('admin/users')}}" aria-expanded="false"><i class="mdi mdi-account"></i><span
                                     class="hide-menu">Users</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/setting')}}" aria-expanded="false"><i class="mdi mdi-cog"></i><span
+                                    class="hide-menu">Setting</span></a></li>
                         <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/boards')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
                                     class="hide-menu">All Boards</span></a></li>
@@ -251,6 +253,7 @@
             </div>
             <!-- End Sidebar scroll-->
         </aside>
+        @endif
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->

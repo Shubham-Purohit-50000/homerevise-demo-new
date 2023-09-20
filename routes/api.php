@@ -16,16 +16,14 @@ use App\Http\Controllers\API\CourseManagementController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('pre-login/details', [CourseManagementController::class, 'prelogin']);
 
 Route::controller(RegisterController::class)->group(function(){
     Route::post('register', 'register');
     Route::post('login', 'login');
 });
         
-Route::middleware('auth:sanctum')->group( function () {
+Route::middleware(['auth:sanctum', 'api.sanctum'])->group( function () {
     Route::get('name', function(){
         return auth()->user()->email;
     });
@@ -34,9 +32,10 @@ Route::middleware('auth:sanctum')->group( function () {
     });
     Route::get('user/course/details', [CourseManagementController::class, 'course']);
     Route::post('user/add/course', [CourseManagementController::class, 'addKey']);
+    Route::post('user/update/profile', [RegisterController::class, 'updateProfile']);
 });
 
 //for unauthorize user
-Route::get('/login', function () {
+Route::get('login', function () {
     return response()->json(['message' => 'Unauthorized. Please check your token.'], 401);
-})->name('login');
+}); 

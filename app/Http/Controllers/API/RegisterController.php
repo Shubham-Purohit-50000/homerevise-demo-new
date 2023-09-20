@@ -12,6 +12,7 @@ use Exception;
 use Twilio\Rest\Client;
 use App\Models\Activation;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
    
 class RegisterController extends BaseController
 {
@@ -103,6 +104,35 @@ class RegisterController extends BaseController
     
         // Authentication failed
         return $this->sendError('Unauthorised.', ['error' => 'Invalid login credentials.'], 401);
+    }
+
+
+    public function updateProfile(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . auth()->user()->id,
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed file types and maximum size as needed.
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Validation Error.', $validator->errors(), 403);
+        }
+
+        $user = auth()->user();
+        $input = $request->all();
+
+        // Handle profile picture upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('profile_pictures', 'public');
+            // Save the image path in the user's database record
+            $input['image'] = $imagePath;
+        }
+
+        $user->update($input);
+
+        $success['name'] =  $input['name'];
+        return $this->sendResponse($success, 'Profile updated successfully.');
     }
      
     

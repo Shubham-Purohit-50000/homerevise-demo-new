@@ -119,7 +119,7 @@
                                         <form action="{{ route('courses.destroy', ['course' => $item->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger text-white"><span class="mdi mdi-delete-empty"></span> Delete</button>
+                                            <button type="submit" class="btn btn-sm btn-danger text-white" onclick="return confirmDelete('On delete this , All activations keys under this will be deleted')"><span class="mdi mdi-delete-empty"></span> Delete</button>
                                         </form>
                                     </td>
                                 </tr>
