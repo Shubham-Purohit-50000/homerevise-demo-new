@@ -10,6 +10,7 @@ use Validator;
 use Exception;
 use App\Models\Activation;
 use Carbon\Carbon;
+use App\Models\Setting;
 
 class CourseManagementController extends BaseController
 {
@@ -98,6 +99,35 @@ class CourseManagementController extends BaseController
             $activationDetails[] = $activationData;
         }
         return $this->sendResponse($activationData, 'user course details.');
+    }
+
+    public function prelogin(){
+        $settings = Setting::get();
+        $data = array();
+
+        foreach($settings as $setting){
+            $item = json_decode($setting->value);
+            if($setting->setting_option == 'base_url'){
+                $data['server']['url'] = $item->url;
+            }if($setting->setting_option == 'app_maintainance'){
+                $data['app_maintainance']['status'] = $item->maintain_mode;
+                $data['app_maintainance']['message'] = $item->message;
+            }if($setting->setting_option == 'app_version'){
+                $data['app']['link'] = $item->link;
+                $data['app']['version'] = $item->version;
+            }if($setting->setting_option == 'pages'){
+                $data['pages']['privacy_policy'] = 'privacy-policy';
+                $data['pages']['term_condition'] = 'term-condition';
+                $data['pages']['support'] = 'support';
+            }if($setting->setting_option == 'announcements'){
+                $data['announcements']['status'] = $item->status;
+                $data['announcements']['heading'] = $item->heading;
+                $data['announcements']['body'] = $item->body;
+                $data['announcements']['image'] = 'storage/'.$item->image;
+            }
+        }
+
+        return $this->sendResponse($data, 'Prelogin api data.');
     }
     
     

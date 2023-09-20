@@ -79,7 +79,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="folder_name">Folder Name</label>
+                                <label for="folder_name">Folder Name (optional)</label>
                                 <input type="text" name="folder_name" class="form-control" id="folder_name">
                                 @error('folder_name')
                                     <span class="text-danger">{{$message}}</span>

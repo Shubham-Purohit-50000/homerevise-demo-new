@@ -12,6 +12,7 @@ use App\Http\Controllers\TopicController;
 use App\Http\Controllers\SubtopicController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WebsiteController;
 
 
 /*
@@ -25,7 +26,7 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', [AdminController::class, 'login']);
+Route::get('/', [AdminController::class, 'login'])->name('home');
 Route::post('admin/login', [AdminController::class, 'postLogin']);
 Route::group(['middleware' => 'is_admin', 'prefix' => 'admin'], function () {
     Route::get('dashboard', function () {
@@ -47,10 +48,18 @@ Route::group(['middleware' => 'is_admin', 'prefix' => 'admin'], function () {
     Route::get('courses/create/{type}/{id}', [CourseController::class, 'create']);
     Route::get('course/activation/{course}', [CourseController::class, 'showActivation']);
     Route::delete('activation/key/delete/{id}', [CourseController::class, 'deleteActivation']);
+    Route::get('setting', [AdminController::class, 'setting']);
+    Route::post('setting/update/maintainance/mode', [AdminController::class, 'maintainanceMode']);
+    Route::post('setting/update/app/version', [AdminController::class, 'appVerion']);
+    Route::post('setting/update/pages', [AdminController::class, 'pages']);
+    Route::post('setting/update/announcement', [AdminController::class, 'announcement']);
+    Route::post('setting/update/base_url', [AdminController::class, 'base_url']);
 
-    Route::get('admin/logout', [AdminController::class, 'logout']);
+    Route::get('logout', [AdminController::class, 'logout']);
 });
 
-
+Route::get('privacy-policy', [WebsiteController::class, 'privacy']);
+Route::get('term-condition', [WebsiteController::class, 'term_condition']);
+Route::get('support', [WebsiteController::class, 'support']);
 
 
