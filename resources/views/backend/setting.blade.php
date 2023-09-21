@@ -9,6 +9,9 @@
     .info_card h3{
         font-size: 1.2rem;
     }
+    .progress{
+        height: 15px;
+    }
 </style>
 <div class="page-wrapper">
     <!-- ============================================================== -->
@@ -27,9 +30,12 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-7">
-                <div class="text-end upgrade-btn">
+            <div class="col-7 d-flex justify-content-end">
+                <div class="text-end upgrade-btn mx-1">
                     <a href="{{url('admin/dashboard')}}" class="btn btn-danger text-white">Dashboard</a>
+                </div>
+                <div class="text-end upgrade-btn mx-1">
+                    <a href="{{url('/')}}/storage/uploads/apk/homerevise.apk" class="btn btn-info text-white"><span class="mdi mdi-download"></span> Apk</a>
                 </div>
             </div>
         </div>
@@ -112,7 +118,7 @@
                         <form action="{{url('admin/setting/update/app/version')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="link">Download Link</label>
+                                <label for="link">Download Link small ( {{url('/')}}/storage/uploads/apk/homerevise.apk )</label>
                                 <input type="text" name="link" class="form-control" id="link" value="{{$item->link}}">
                             </div>
                             <div class="form-group">
@@ -262,6 +268,38 @@
         @endif
         
     @endforeach
+
+    <div class="row">
+            <!-- column -->
+            <div class="col-6">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- title -->
+                        <div class="d-md-flex">
+                            <div>
+                                <h4 class="card-title">Upload APK</h4>
+                            </div>
+                        </div>
+                        <!-- title -->
+                    </div>
+                    <div class="px-4 pb-4">
+                        <form id="upload-form" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <input type="file" name="file" class="form-control" id="file">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn btn-success text-white">Submit</button>
+                            </div>
+                        </form>
+                        <div id="error-messages"></div>
+                        <div class="progress" style="display: none;">
+                            <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
     </div>
     
@@ -279,5 +317,69 @@
       ],
       ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant"))
     });
-  </script>
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        const uploadForm = $('#upload-form');
+        const progressBar = $('.progress');
+        const progressBarInner = progressBar.find('.progress-bar');
+        const errorMessages = $('#error-messages'); // Add an element to display error messages
+
+        uploadForm.on('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            $.ajax({
+                url: '{{ url('admin/setting/update/apk') }}',
+                method: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                xhr: function () {
+                    const xhr = new window.XMLHttpRequest();
+
+                    // Upload progress
+                    xhr.upload.addEventListener('progress', function (event) {
+                        if (event.lengthComputable) {
+                            const percentCompleted = Math.round((event.loaded * 100) / event.total);
+                            progressBar.css('display', 'block');
+                            progressBarInner.css('width', percentCompleted + '%');
+                            progressBarInner.text(percentCompleted + '%');
+                        }
+                    }, false);
+
+                    return xhr;
+                },
+                success: function (response) {
+                    console.log(response);
+                    // Check if the response contains an "errors" key
+                    if (response.errors) {
+                        // Display the error messages
+                        errorMessages.html('<div class="alert alert-danger">' + response.message + '</div>');
+                    } else {
+                        // Handle the success response here
+                        errorMessages.html('<div class="alert alert-success">' + response.message + '</div>');
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    // Handle any errors here
+                    if (xhr.responseJSON) {
+                        // Display the error message from the JSON response
+                        errorMessages.html('<div class="alert alert-danger">' + xhr.responseJSON.message + '</div>');
+                    } else {
+                        // Fallback error message
+                        errorMessages.html('<div class="alert alert-danger">An error occurred: ' + errorThrown + '</div>');
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+
+
 @endsection

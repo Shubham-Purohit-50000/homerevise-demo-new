@@ -25,6 +25,8 @@ class User extends Authenticatable
         'isVerified',
         'device_id',
         'image',
+        'address',
+        'standard',
     ];
 
     /**

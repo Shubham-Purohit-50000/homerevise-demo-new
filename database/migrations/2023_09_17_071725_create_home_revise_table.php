@@ -133,6 +133,7 @@ return new class extends Migration
             $table->integer('duration');
             $table->boolean('status');
             $table->string('folder_name', 250)->nullable();
+            $table->string('device_type')->nullable();
             $table->timestamps();
         });
 
@@ -146,6 +147,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('device_id', 500)->nullable();
             $table->string('image', 500)->nullable();
+            $table->string('address', 500)->nullable();
+            $table->string('standard', 500)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
@@ -160,9 +163,17 @@ return new class extends Migration
         });
 
 
+        Schema::create('settings', function (Blueprint $table) {
+            $table->id();
+            $table->string('setting_option', 250);
+            $table->text('value')->nullable();
+            $table->timestamps(0); // Use 0 to prevent Laravel from automatically managing created_at and updated_at
+        });
+
+
         Schema::table('activations', function (Blueprint $table) {
-            $table->foreign(['course_id'])->references(['id'])->on('courses');
-            $table->foreign(['user_id'])->references(['id'])->on('users');
+            $table->foreign(['course_id'])->references(['id'])->on('courses')->onDelete('cascade');
+            $table->foreign(['user_id'])->references(['id'])->on('users')->onDelete('cascade');
         });
 
         Schema::table('boards', function (Blueprint $table) {
@@ -244,6 +255,8 @@ return new class extends Migration
             $table->dropForeign('activations_user_id_foreign');
             $table->dropForeign('activations_course_id_foreign');
         });
+
+        Schema::dropIfExists('settings');
 
         Schema::dropIfExists('users');
 

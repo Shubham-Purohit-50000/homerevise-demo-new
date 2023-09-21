@@ -27,7 +27,7 @@ class RegisterController extends BaseController
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required',
-            'phone' => ['required', 'numeric', 'unique:users'],
+            'phone' => ['required', 'numeric', 'unique:users,phone'],
             'activation_key' => 'required|exists:activations,activation_key',
         ]);
    
@@ -110,9 +110,9 @@ class RegisterController extends BaseController
     public function updateProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . auth()->user()->id,
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed file types and maximum size as needed.
+            'email' => 'nullable|email|unique:users,email,' . auth()->user()->id,
+            'phone' => 'nullable|unique:users,phone',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed file types and maximum size as needed.
         ]);
 
         if ($validator->fails()) {
@@ -127,6 +127,9 @@ class RegisterController extends BaseController
             $imagePath = $request->file('image')->store('profile_pictures', 'public');
             // Save the image path in the user's database record
             $input['image'] = $imagePath;
+        }
+        if($request->has('password') and $request->password != null){
+            $input['password'] = Hash::make($input['password']);
         }
 
         $user->update($input);

@@ -51,29 +51,29 @@
                     </div>
                     <div class="px-4 pb-4">
                         <h3 class="mb-3">Course Form</h3>
-                        <form action="{{url('admin/courses')}}" method="POST">
+                        <form action="{{ url('admin/courses') }}" method="POST">
                             @csrf
                             <input type="hidden" name="type" value="{{$data['type']}}">
                             <input type="hidden" name="id" value="{{$data['id']}}">
                             <div class="form-group">
                                 <label for="name">Course Name</label>
-                                <input type="text" name="name" class="form-control" id="name" >
+                                <input type="text" name="name" class="form-control" id="name">
                                 @error('name')
-                                    <span class="text-danger">{{$message}}</span>
+                                <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="count">Number of Activation keys</label>
-                                <input type="number" name="count" class="form-control" id="count" min='1' value="1">
+                                <input type="number" name="count" class="form-control" id="count" min="1" value="1">
                                 @error('count')
-                                    <span class="text-danger">{{$message}}</span>
+                                <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="duration">Course Duration (months)</label>
-                                <input type="number" name="duration" class="form-control" id="duration" min='1' value="1">
+                                <input type="number" name="duration" class="form-control" id="duration" min="1" value="1">
                                 @error('duration')
-                                    <span class="text-danger">{{$message}}</span>
+                                <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
@@ -83,15 +83,22 @@
                                     <option value="0">Inactive</option>
                                 </select>
                                 @error('status')
-                                    <span class="text-danger">{{$message}}</span>
+                                <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="folder_name">Folder Name (optional)</label>
                                 <input type="text" name="folder_name" class="form-control" id="folder_name">
                                 @error('folder_name')
-                                    <span class="text-danger">{{$message}}</span>
+                                <span class="text-danger">{{$message}}</span>
                                 @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="device_type">Device Type</label>
+                                <select name="device_type" id="device_type" class="form-control">
+                                    <option value="mobile" selected>Mobile</option>
+                                    <option value="android_box">Android Box</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn btn-success text-white">Submit</button>

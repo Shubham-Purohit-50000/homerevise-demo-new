@@ -23,7 +23,7 @@ Route::controller(RegisterController::class)->group(function(){
     Route::post('login', 'login');
 });
         
-Route::middleware(['auth:sanctum', 'api.sanctum'])->group( function () {
+Route::middleware(['auth:sanctum'])->group( function () {
     Route::get('name', function(){
         return auth()->user()->email;
     });
@@ -38,4 +38,4 @@ Route::middleware(['auth:sanctum', 'api.sanctum'])->group( function () {
 //for unauthorize user
 Route::get('login', function () {
     return response()->json(['message' => 'Unauthorized. Please check your token.'], 401);
-}); 
+})->name('api.login'); 
