@@ -137,6 +137,24 @@ class RegisterController extends BaseController
         $success['name'] =  $input['name'];
         return $this->sendResponse($success, 'Profile updated successfully.');
     }
+
+    public function logout(Request $request)
+    {
+        // Revoke the user's current token
+        auth()->user()->tokens->each(function ($token, $key) {
+            $token->delete();
+        });
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    public function de_register_device(Request $request)
+    {
+        auth()->user()->update(['device_id' => null]);
+
+        return response()->json(['message' => 'Device deregistered successfully']);
+    }
+
      
     
 }

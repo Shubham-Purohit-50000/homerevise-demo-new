@@ -98,7 +98,7 @@ class CourseManagementController extends BaseController
     
             $activationDetails[] = $activationData;
         }
-        return $this->sendResponse($activationData, 'user course details.');
+        return $this->sendResponse($activationDetails, 'user course details.');
     }
 
     public function prelogin(){
