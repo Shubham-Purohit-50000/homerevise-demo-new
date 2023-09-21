@@ -54,10 +54,20 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $data = $request->all();
+        $data = $request->validate([
+            'email' => 'nullable|email|unique:users,email,' . $user->id,
+            'phone' => 'nullable|unique:users,phone',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed file types and maximum size as needed.
+        ]);
 
-        if($request->has('password')){
-            $data['password'] =  Hash::make($request->password);
+        // Handle profile picture upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('profile_pictures', 'public');
+            // Save the image path in the user's database record
+            $data['image'] = $imagePath;
+        }
+        if($request->has('password') and $request->password != null){
+            $data['password'] = Hash::make($data['password']);
         }
 
         $user->update($data);
@@ -73,12 +83,29 @@ class UserController extends Controller
         $data = $request->validate([
             'activation_key' => 'required|exists:activations,activation_key',
         ]);
+
         $activation = Activation::where('activation_key', $request->activation_key)->first();
-        $activation->user_id = $user->id;
-        $activation->activation_time = Carbon::now();
-        $activation->save();
+        if($activation->user_id == null){
+            $activation->user_id = $user->id;
+            $activation->activation_time = Carbon::now();
+            $activation->save();
+        }else{
+            return redirect()->route('users.index')->with('error', 'This activation key is already in use');
+        }
 
         return redirect()->route('users.index')->with('success', 'Course added successfully');
+    }
+
+    public function show(User $user){
+        $activations = $user->activation;
+        return view('users.show', compact('user'), compact('activations'));
+    }
+
+    public function updateCourseDuration(Request $request, User $user){
+        $user->update([
+            'course_extended_days' => $request->duration
+        ]);
+        return redirect()->back()->with('success', 'Course date Expended successfully');
     }
 
     public function destroy(User $user)

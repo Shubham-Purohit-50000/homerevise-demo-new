@@ -51,6 +51,7 @@
                     </div>
                     <div class="px-4 pb-4">
                         <h3 class="mb-3">Subject Form</h3>
+                        <h6 class="mb-3">Folder Name is : {{$subject->folder_name}}</h6>
                         <form action="{{route('subjects.update', ['subject'=>$subject->id])}}" method="POST">
                             @csrf
                             @method('PUT')

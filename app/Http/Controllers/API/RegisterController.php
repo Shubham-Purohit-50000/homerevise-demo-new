@@ -134,7 +134,7 @@ class RegisterController extends BaseController
 
         $user->update($input);
 
-        $success['name'] =  $input['name'];
+        $success['name'] =  $user->name;
         return $this->sendResponse($success, 'Profile updated successfully.');
     }
 

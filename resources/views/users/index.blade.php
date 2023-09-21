@@ -71,6 +71,7 @@
                                     <td>
                                         <a href="{{url('admin/add/user/key', ['user'=>$item->id])}}"><button class="btn btn-sm btn-success"><span class="mdi mdi-plus"></span> Add Key</button></a>
                                         <a href="{{route('users.edit', ['user'=>$item->id])}}"><button class="btn btn-sm btn-info"><span class="mdi mdi-pen"></span> Edit</button></a>
+                                        <a href="{{route('users.show', ['user'=>$item->id])}}"><button class="btn btn-sm btn-warning"><span class="mdi mdi-eye"></span> Show</button></a>
                                         <form action="{{ route('users.destroy', ['user' => $item->id]) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')

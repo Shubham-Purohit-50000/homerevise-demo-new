@@ -51,25 +51,25 @@
                     </div>
                     <div class="px-4 pb-4">
                         <h3 class="mb-3">User Form</h3>
-                        <form action="{{route('users.update', ['user'=>$user->id])}}" method="POST">
+                        <form action="{{route('users.update', ['user'=>$user->id])}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="name">User Name</label>
+                                <label for="name">User Name (optional)</label>
                                 <input type="text" name="name" class="form-control" id="name" value="{{$user->name}}">
                                 @error('name')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="phone">User Phone</label>
+                                <label for="phone">User Phone (optional)</label>
                                 <input type="number" name="phone" class="form-control" id="phone" value="{{$user->phone}}">
                                 @error('phone')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="phone">User Email</label>
+                                <label for="phone">User Email (optional)</label>
                                 <input type="email" name="email" class="form-control" id="email" value="{{$user->email}}">
                                 @error('email')
                                     <span class="text-danger">{{$message}}</span>
@@ -78,7 +78,19 @@
                             <div class="form-group">
                                 <label for="password">User Password (optional)</label>
                                 <input type="password" name="password" class="form-control" id="password" >
-                                @error('password')
+                            </div>
+                            <div class="form-group">
+                                <label for="standard">User Standard (optional)</label>
+                                <input type="text" name="standard" class="form-control" id="standard" value="{{$user->standard}}">
+                            </div>
+                            <div class="form-group">
+                                <label for="address">User Address (optional)</label>
+                                <textarea type="text" name="address" class="form-control" id="address">{{$user->address}}</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="image">User Profile</label>
+                                <input type="file" name="image" class="form-control" id="image">
+                                @error('image')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
                             </div>
