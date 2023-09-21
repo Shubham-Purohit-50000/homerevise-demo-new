@@ -33,6 +33,8 @@ Route::middleware(['auth:sanctum'])->group( function () {
     Route::get('user/course/details', [CourseManagementController::class, 'course']);
     Route::post('user/add/course', [CourseManagementController::class, 'addKey']);
     Route::post('user/update/profile', [RegisterController::class, 'updateProfile']);
+    Route::get('user/logout', [RegisterController::class, 'logout']);
+    Route::get('device/de-register', [RegisterController::class, 'de_register_device']);
 });
 
 //for unauthorize user
