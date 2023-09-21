@@ -27,6 +27,7 @@ class User extends Authenticatable
         'image',
         'address',
         'standard',
+        'course_extended_days'
     ];
 
     /**

@@ -72,6 +72,9 @@ class CourseManagementController extends BaseController
 
                 $givenDatetime = Carbon::parse($activation->activation_time);
                 $futureDatetime = $givenDatetime->addMonths($activation->course->duration);
+                if($user->course_extended_days !== null){
+                    $futureDatetime = $givenDatetime->addDays($user->course_extended_days);
+                }
                 $futureDatetimeFormatted = $futureDatetime->format('Y-m-d H:i:s');
 
                 $isExpired = Carbon::now()->greaterThan($futureDatetime);

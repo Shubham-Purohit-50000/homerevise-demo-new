@@ -149,6 +149,7 @@ return new class extends Migration
             $table->string('image', 500)->nullable();
             $table->string('address', 500)->nullable();
             $table->string('standard', 500)->nullable();
+            $table->integer('course_extended_days')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

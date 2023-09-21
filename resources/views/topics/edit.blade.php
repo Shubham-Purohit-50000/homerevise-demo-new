@@ -51,6 +51,7 @@
                     </div>
                     <div class="px-4 pb-4">
                         <h3 class="mb-3">Topic Form</h3>
+                        <h6 class="mb-3">Folder Name is : {{$topic->folder_name}}</h6>
                         <form action="{{route('topics.update', ['topic'=>$topic->id])}}" method="POST">
                             @csrf
                             @method('PUT')
