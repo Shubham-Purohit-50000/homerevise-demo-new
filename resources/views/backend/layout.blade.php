@@ -33,6 +33,10 @@
     <!-- JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script> 
 
+    <!-- datatable liberary -->
+    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> 
+
     @if(!auth('admin')->check())
     <style>
         #main-wrapper[data-layout=vertical][data-sidebartype=full] .page-wrapper{
@@ -40,6 +44,12 @@
         }
     </style>
     @endif
+
+    <style>
+        .table-responsive{
+            padding: 0px 20px!important;
+        }
+    </style>
 
 </head>
 
@@ -67,7 +77,7 @@
                     <!-- ============================================================== -->
                     <!-- Logo -->
                     <!-- ============================================================== -->
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{{url('admin/dashboard')}}">
                         <span class="logo-text">
                             <!-- Light Logo text -->
                             <img src="{{asset('images/logo/home_revise.jpeg')}}" class="light-logo" alt="homepage" />
@@ -288,6 +298,8 @@
         function confirmDelete(message) {
             return confirm(message);
         }
+
+        let table = new DataTable('table');
 
     </script>
     
