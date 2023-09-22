@@ -46,6 +46,7 @@ class RegisterController extends BaseController
         if($activation->user_id == null){
             $activation->user_id = $user->id;
             $activation->activation_time = Carbon::now();
+            $activation->expiry_date = Carbon::now()->addMonths($activation->course->duration);
             $activation->save();
         }else{
             return $this->sendError('Unauthorised.', ['error' => 'This activation key is already in use.'], 401);
@@ -82,6 +83,17 @@ class RegisterController extends BaseController
         }
 
         $loginField = $request->input('login_field');
+        $user = User::where($this->username(), $loginField)->first(); // Fetch the user by the login field
+
+        if (!$user) {
+            return $this->sendError('Unauthorised.', ['error' => 'User not found.'], 401);
+        }
+
+        // Check if the user's status is 1 (active)
+        if ($user->status != 1) {
+            return $this->sendError('Unauthorised.', ['error' => 'Your account is deactivated.'], 401);
+        }
+
         $credentials = [
             $this->username() => $loginField,
             'password' => $request->input('password'),

@@ -226,36 +226,12 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/setting')}}" aria-expanded="false"><i class="mdi mdi-cog"></i><span
                                     class="hide-menu">Setting</span></a></li>
-                        <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/boards')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
-                                    class="hide-menu">All Boards</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/medium')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
-                                    class="hide-menu">All Mediums</span></a></li> -->
-                        <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/plans')}}" aria-expanded="false"><i class="mdi mdi-flower-tulip"></i><span
-                                    class="hide-menu">All Plan</span></a></li> -->
-                        <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/request_session')}}" aria-expanded="false"><i class="mdi mdi-lan-connect"></i><span
-                                    class="hide-menu">Requested Session</span></a></li>            
+                                href="{{url('/')}}/storage/uploads/apk/homerevise.apk" aria-expanded="false"><i class="mdi mdi-download"></i><span
+                                    class="hide-menu">Android Apk</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/quizes')}}" aria-expanded="false"><i class="mdi mdi-feather"></i><span
-                                    class="hide-menu">Quizes</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/journels')}}" aria-expanded="false"><i class="mdi mdi-file"></i><span
-                                    class="hide-menu">Journels</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/request_counselling')}}" aria-expanded="false"><i class="mdi mdi-border-all"></i><span
-                                    class="hide-menu">Requested Counselling</span></a></li>   
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/therapy_intake')}}" aria-expanded="false"><i class="mdi mdi-bottle-tonic-plus"></i><span
-                                    class="hide-menu">Therapy Intake</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/counsellors')}}" aria-expanded="false"><i class="mdi mdi-doctor"></i><span
-                                    class="hide-menu">Counsellors</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('admin/transactions')}}" aria-expanded="false"><i class="mdi mdi-currency-usd"></i><span
-                                    class="hide-menu">Transactions</span></a></li> -->
+                                href="{{url('/')}}/storage/uploads/apk/homerevise_win.apk" aria-expanded="false"><i class="mdi mdi-download"></i><span
+                                    class="hide-menu">Window Apk</span></a></li>
                     </ul>
 
                 </nav>

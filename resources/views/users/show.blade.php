@@ -107,7 +107,7 @@
                                     <th class="border-top-0">#C_ID</th>
                                     <th class="border-top-0">C Name</th>
                                     <th class="border-top-0">C Duration</th>
-                                    <th class="border-top-0">Expended Days</th>
+                                    <th class="border-top-0">Activation Date</th>
                                     <th class="border-top-0">Expire Date</th>
                                     <th class="border-top-0">Action</th>
                                 </tr>
@@ -118,17 +118,19 @@
                                     <td>{{$activation->course->id}}</td>
                                     <td>{{$activation->course->name}}</td>
                                     <td>{{$activation->course->duration}}</td>
-                                    <td>{{$user->course_extended_days}}</td>
                                     <td>
                                         <?php
-                                            $givenDatetime = Carbon::parse($activation->activation_time);
-                                            $futureDatetime = $givenDatetime->addMonths($activation->course->duration);
-                                            if($user->course_extended_days !== null){
-                                                $futureDatetime = $givenDatetime->addDays($user->course_extended_days);
-                                            }
-                                            $futureDatetimeFormatted = $futureDatetime->format('Y-M-d h:i:s a');
+                                            $activation_time = Carbon::parse($activation->activation_time);
+                                            $activation_time = $activation_time->format('Y-M-d');
                                         ?>
-                                        {{$futureDatetimeFormatted}}
+                                        {{$activation_time}}
+                                    </td>
+                                    <td>
+                                        <?php
+                                            $expiry_date = Carbon::parse($activation->expiry_date);
+                                            $expiry_date = $expiry_date->format('Y-M-d');
+                                        ?>
+                                        {{$expiry_date}}
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#myModal_{{$activation->id}}">
@@ -144,14 +146,16 @@
                                                     <h4 class="modal-title">Manage Course Duration</h4>
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     </div>
-                                                    
+                                                    @php
+                                                        $currentDate = date('Y-m-d');
+                                                    @endphp
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
-                                                        <form action="{{url('admin/update/user/course/duration', ['user'=>$user->id])}}" method="post">
+                                                        <form action="{{url('admin/update/user/course/duration', ['activation'=>$activation->id])}}" method="post">
                                                             @csrf
                                                             <div class="form-group">
-                                                                <label for="duration">Duration (Days)</label>
-                                                                <input type="number" name="duration" class="form-control" id="duration" min="0" value="0">
+                                                                <label for="expiry_date">Exp Date</label>
+                                                                <input type="date" name="expiry_date" class="form-control" id="expiry_date" min="<?php echo $currentDate; ?>">
                                                             </div>
                                                             <div class="form-group">
                                                                 <button type="submit" class="btn btn-success">Submit</button>

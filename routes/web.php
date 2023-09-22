@@ -55,7 +55,8 @@ Route::group(['middleware' => 'is_admin', 'prefix' => 'admin'], function () {
     Route::post('setting/update/announcement', [AdminController::class, 'announcement']);
     Route::post('setting/update/base_url', [AdminController::class, 'base_url']);
     Route::post('setting/update/apk', [AdminController::class, 'updateApk']);
-    Route::post('update/user/course/duration/{user}', [UserController::class, 'updateCourseDuration']);
+    Route::post('setting/update/window/apk', [AdminController::class, 'updateWinApk']);
+    Route::post('update/user/course/duration/{activation}', [UserController::class, 'updateCourseDuration']);
     Route::get('user/deregister/device/{user}', [UserController::class, 'deRegisterDevice']);
 
     Route::get('logout', [AdminController::class, 'logout']);

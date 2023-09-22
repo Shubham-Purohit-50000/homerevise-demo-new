@@ -95,6 +95,7 @@ class UserController extends Controller
         if($activation->user_id == null){
             $activation->user_id = $user->id;
             $activation->activation_time = Carbon::now();
+            $activation->expiry_date = Carbon::now()->addMonths($activation->course->duration);
             $activation->save();
         }else{
             return redirect()->route('users.index')->with('error', 'This activation key is already in use');
@@ -108,11 +109,15 @@ class UserController extends Controller
         return view('users.show', compact('user'), compact('activations'));
     }
 
-    public function updateCourseDuration(Request $request, User $user){
-        $user->update([
-            'course_extended_days' => $request->duration
+    public function updateCourseDuration(Request $request, Activation $activation){
+
+        $expiry_date = Carbon::parse($request->expiry_date);
+        $expiry_date = $expiry_date->format('Y-m-d H:i:s');
+
+        $activation->update([
+            'expiry_date' => $expiry_date
         ]);
-        return redirect()->back()->with('success', 'Course date Expended successfully');
+        return redirect()->back()->with('success', 'Expiry Date updated successfully');
     }
 
     public function deRegisterDevice(User $user){

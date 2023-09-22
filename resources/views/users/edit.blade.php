@@ -88,6 +88,13 @@
                                 <textarea type="text" name="address" class="form-control" id="address">{{$user->address}}</textarea>
                             </div>
                             <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value="1" selected>Active</option>
+                                    <option value="0">Deactive</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="image">User Profile</label>
                                 <input type="file" name="image" class="form-control" id="image">
                                 @error('image')
