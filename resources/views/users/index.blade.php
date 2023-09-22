@@ -57,6 +57,7 @@
                                     <th class="border-top-0">Email</th>
                                     <th class="border-top-0">phone</th>
                                     <th class="border-top-0">Courses</th>
+                                    <th class="border-top-0">Status</th>
                                     <th class="border-top-0">Action</th>
                                 </tr>
                             </thead>
@@ -68,6 +69,13 @@
                                     <td>{{$item->email}}</td>
                                     <td>{{$item->phone}}</td>
                                     <td>{{$item->activation ? $item->activation->count() : '--'}}</td>
+                                    <td>
+                                        @if($item->status == 1)
+                                            <span class="text-success">Active</span>
+                                        @else
+                                            <span class="text-danger">Deactive</span>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{url('admin/add/user/key', ['user'=>$item->id])}}"><button class="btn btn-sm btn-success"><span class="mdi mdi-plus"></span> Add Key</button></a>
                                         <a href="{{route('users.edit', ['user'=>$item->id])}}"><button class="btn btn-sm btn-info"><span class="mdi mdi-pen"></span> Edit</button></a>

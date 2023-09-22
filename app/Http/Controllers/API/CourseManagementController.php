@@ -70,14 +70,10 @@ class CourseManagementController extends BaseController
     
             if (filled($activation->course->standard)) {
 
-                $givenDatetime = Carbon::parse($activation->activation_time);
-                $futureDatetime = $givenDatetime->addMonths($activation->course->duration);
-                if($user->course_extended_days !== null){
-                    $futureDatetime = $givenDatetime->addDays($user->course_extended_days);
-                }
-                $futureDatetimeFormatted = $futureDatetime->format('Y-m-d H:i:s');
+                $expiry_date = Carbon::parse($activation->expiry_date);
+                $expiry_date_formated = $expiry_date->format('Y-m-d H:i:s');
 
-                $isExpired = Carbon::now()->greaterThan($futureDatetime);
+                $isExpired = Carbon::now()->greaterThan($expiry_date);
 
                 if ($isExpired) {
                     // The course is expired
@@ -87,7 +83,7 @@ class CourseManagementController extends BaseController
                     $activationData['course_status'] = 'active';
                 }
 
-                $activationData['expiry_time'] = $futureDatetimeFormatted;
+                $activationData['expiry_time'] = $expiry_date_formated;
                 $activationData['course'] = $activation->load('course.standard.subjects.chapters.topics.subtopics');
                 //$activation->load('course.standard.subjects.chapters.topics.subtopics');
             }
