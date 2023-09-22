@@ -113,11 +113,11 @@ class RegisterController extends BaseController
         $validator = Validator::make($request->all(), [
             'email' => [
                 'nullable','email',
-                Rule::unique('users', 'email')->ignore($user->id),
+                Rule::unique('users', 'email')->ignore(auth()->id()),
             ],
             'phone' => [
                 'nullable',
-                Rule::unique('users', 'phone')->ignore($user->id),
+                Rule::unique('users', 'phone')->ignore(auth()->id()),
             ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed file types and maximum size as needed.
         ]);
