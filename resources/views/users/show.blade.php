@@ -51,8 +51,8 @@
                             <div>
                                 <h4 class="card-title">User Profile</h4>
                             </div>
-                            <div>
-                                <img src="{{asset('storage/'.$user->image )}}" alt="" class="rounded-circle w-50">
+                            <div id="profile_img my-2">
+                                <img src="{{asset('storage/'.$user->image )}}" alt="" class="rounded-circle shadow" style="width:120px;height:120px;">
                             </div>
                             <div>
                             <ul class="list-group list-group-flush">

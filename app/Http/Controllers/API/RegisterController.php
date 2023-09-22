@@ -13,6 +13,7 @@ use Twilio\Rest\Client;
 use App\Models\Activation;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
    
 class RegisterController extends BaseController
 {
@@ -110,8 +111,14 @@ class RegisterController extends BaseController
     public function updateProfile(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'nullable|email|unique:users,email,' . auth()->user()->id,
-            'phone' => 'nullable|unique:users,phone',
+            'email' => [
+                'nullable','email',
+                Rule::unique('users', 'email')->ignore($user->id),
+            ],
+            'phone' => [
+                'nullable',
+                Rule::unique('users', 'phone')->ignore($user->id),
+            ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed file types and maximum size as needed.
         ]);
 

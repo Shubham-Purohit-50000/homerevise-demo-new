@@ -7,6 +7,7 @@ use App\Models\Activation;
 use Illuminate\Http\Request;
 use Hash;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -55,8 +56,14 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $data = $request->validate([
-            'email' => 'nullable|email|unique:users,email,' . $user->id,
-            'phone' => 'nullable|unique:users,phone',
+            'email' => [
+                'nullable','email',
+                Rule::unique('users', 'email')->ignore($user->id),
+            ],
+            'phone' => [
+                'nullable',
+                Rule::unique('users', 'phone')->ignore($user->id),
+            ],
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed file types and maximum size as needed.
         ]);
 
@@ -106,6 +113,11 @@ class UserController extends Controller
             'course_extended_days' => $request->duration
         ]);
         return redirect()->back()->with('success', 'Course date Expended successfully');
+    }
+
+    public function deRegisterDevice(User $user){
+        $user->update(['device_id' => null]);
+        return redirect()->back()->with('success', 'This user device_id removed');
     }
 
     public function destroy(User $user)
