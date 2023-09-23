@@ -67,6 +67,8 @@ class UserController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the allowed file types and maximum size as needed.
         ]);
 
+        $data = $request->all();
+
         // Handle profile picture upload
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('profile_pictures', 'public');
