@@ -8,10 +8,18 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $subjects = Subject::with('standard')->get();
-        return view('subjects.index', compact('subjects'));
+        $search = $request->input('search'); // Get the search input from the request
+        $query = Subject::with('standard');
+
+        if (!empty($search)) {
+            $query->where('name', 'like', '%' . $search . '%');
+        }
+
+        $subjects = $query->paginate(10); // 10 chapters per page
+
+        return view('subjects.index', compact('subjects', 'search'));
     }
 
     public function create()

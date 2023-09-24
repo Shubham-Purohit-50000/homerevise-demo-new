@@ -8,10 +8,18 @@ use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $topics = Topic::with('chapter')->get();
-        return view('topics.index', compact('topics'));
+        $search = $request->input('search'); // Get the search input from the request
+        $query = Topic::with('chapter');
+
+        if (!empty($search)) {
+            $query->where('heading', 'like', '%' . $search . '%');
+        }
+
+        $topics = $query->paginate(10); // 10 chapters per page
+
+        return view('topics.index', compact('topics', 'search'));
     }
 
     public function create()
