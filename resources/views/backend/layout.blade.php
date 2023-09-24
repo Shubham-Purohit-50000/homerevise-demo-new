@@ -49,6 +49,10 @@
         .table-responsive{
             padding: 0px 20px!important;
         }
+        .left-sidebar{
+            position: fixed;
+            overflow-y: auto;
+        }
     </style>
 
 </head>

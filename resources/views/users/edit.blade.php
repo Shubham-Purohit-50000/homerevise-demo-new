@@ -77,7 +77,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="password">User Password (optional)</label>
-                                <input type="password" name="password" class="form-control" id="password" >
+                                <input type="password" name="password" class="form-control" id="password">
                             </div>
                             <div class="form-group">
                                 <label for="standard">User Standard (optional)</label>

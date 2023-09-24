@@ -15,6 +15,7 @@ class Course extends Model
         'status',
         'folder_name',
         'device_type',
+        'access_count',
     ];
 
     public function standard()

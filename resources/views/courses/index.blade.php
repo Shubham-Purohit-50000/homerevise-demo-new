@@ -68,6 +68,7 @@
                                     <th class="border-top-0">Standard</th>
                                     <th class="border-top-0">Subject</th>
                                     <th class="border-top-0">Name</th>
+                                    <th class="border-top-0">Device Type</th>
                                     <th class="border-top-0">Actication key</th>
                                     <th class="border-top-0">Status</th>
                                     <th class="border-top-0">Action</th>
@@ -82,18 +83,8 @@
                                     <td>{{$item->standard->medium->board->name}}</td>
                                     <td>{{$item->standard->medium->name}}</td>
                                     <td>{{$item->standard->name}}</td>
-                                    <td>--</td>
+                                    <td>All</td>
                                     <td>{{$item->name}}</td>
-                                    <td>
-                                        <a href="{{url('admin/course/activation', ['course'=>$item->id])}}" class="">{{$item->activation->count()}}</a>
-                                    </td>
-                                    <td>
-                                        @if ($item->status == 1)
-                                           <span class="text-success">Active</span> 
-                                        @else
-                                            <span class="text-danger">Disable</span> 
-                                        @endif
-                                    </td>
                                     @endif
                                     @if(isset($item->subject_id))
                                     <td>{{$item->id}}</td>
@@ -103,6 +94,12 @@
                                     <td>{{$item->subject->standard->name}}</td>
                                     <td>{{$item->subject->name}}</td>
                                     <td>{{$item->name}}</td>
+                                    @endif
+                                    <td>{{$item->device_type}}
+                                        @if($item->device_type == 'android_box')
+                                            ({{$item->access_count}})
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{url('admin/course/activation', ['course'=>$item->id])}}" class="">{{$item->activation->count()}}</a>
                                     </td>
@@ -113,7 +110,6 @@
                                             <span class="text-danger">Disable</span> 
                                         @endif
                                     </td>
-                                    @endif
                                     <td>
                                         <a href="{{route('courses.edit', ['course'=>$item->id])}}"><button class="btn btn-sm btn-info"><span class="mdi mdi-pen"></span> Edit</button></a>
                                         <form action="{{ route('courses.destroy', ['course' => $item->id]) }}" method="POST" class="d-inline">
