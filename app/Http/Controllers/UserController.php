@@ -75,8 +75,10 @@ class UserController extends Controller
             // Save the image path in the user's database record
             $data['image'] = $imagePath;
         }
-        if($request->has('password') and $request->password != null){
+        if($request->has('password') and $request->password != null and $request->password != ''){
             $data['password'] = Hash::make($data['password']);
+        }else{
+            $data['password'] = $user->password;
         }
 
         $user->update($data);

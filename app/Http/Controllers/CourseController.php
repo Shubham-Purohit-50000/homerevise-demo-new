@@ -26,6 +26,7 @@ class CourseController extends Controller
 
     public function store(Request $request)
     {
+        
         if ($request->type == 'subject') {
             $request->merge(['subject_id' => $request->id]);
         } elseif ($request->type == 'standard') {

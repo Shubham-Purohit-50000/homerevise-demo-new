@@ -57,7 +57,7 @@
                             <input type="hidden" name="id" value="{{$data['id']}}">
                             <div class="form-group">
                                 <label for="name">Course Name</label>
-                                <input type="text" name="name" class="form-control" id="name">
+                                <input type="text" name="name" class="form-control" id="name" required>
                                 @error('name')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
@@ -112,4 +112,26 @@
     </div>
     
 </div>
+<script>
+    $(document).ready(function() {
+        $('form select[name="device_type"]').change(function() {
+            if ($(this).val() === "android_box") {
+                if (!$('input[name="access_count"]').length) {
+                    var countInput = $('<input>').attr({
+                        type: 'number',
+                        name: 'access_count',
+                        placeholder: 'Enter count',
+                        class: 'form-control mt-3',
+                        min: '10',
+                        value: '10',
+                        required: true,
+                    });
+                    $(this).parent().append(countInput);
+                }
+            } else {
+                $('input[name="access_count"]').remove();
+            }
+        });
+    });
+</script>
 @endsection

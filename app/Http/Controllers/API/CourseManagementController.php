@@ -19,35 +19,22 @@ class CourseManagementController extends BaseController
         $data = $request->validate([
             'activation_key' => 'required|exists:activations,activation_key',
         ]);
+
         $activation = Activation::where('activation_key', $request->activation_key)->first();
-        $activation->user_id = $user->id;
-        $activation->save();
+        if($activation->user_id == null){
+            $activation->user_id = $user->id;
+            $activation->activation_time = Carbon::now();
+            $activation->expiry_date = Carbon::now()->addMonths($activation->course->duration);
+            $activation->save();
+        }else{
+            return $this->sendError('Unauthorised.', ['error' => 'This activation key is already in use.'], 401);
+        }
 
         $data['status'] = true;
 
         return $this->sendResponse($data, 'Course activation Key added Successfully.');
     }
 
-    public function course_old(Request $request) {
-        // Get the authenticated user
-        $user = auth()->user();
-    
-        // Check if the user has an activation and related models
-        if ($user->activation) {
-            $activation = $user->activation;//->course->standard;
-    
-            if (filled($activation->course->standard)) {
-                $activation->load('course.standard.subjects.chapters.topics.subtopics');
-            }
-            if (filled($activation->subject)) {
-                $activation->load('course.subject.chapters.topics.subtopics');
-            }
-
-            return $this->sendResponse(['activation'=>$activation], 'user course details.');
-        }
-        // Handle the case where there's no activation or standard associated with the user.
-        return response()->json(['message' => 'No standard found for this user.'], 404);
-    }
 
     public function course(Request $request) {
         // Get the authenticated user
