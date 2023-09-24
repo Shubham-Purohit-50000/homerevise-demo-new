@@ -53,6 +53,16 @@
             position: fixed;
             overflow-y: auto;
         }
+        svg{
+            height: 30px;
+        }
+        .flex.justify-between.flex-1{
+            display:none;
+        }
+        .topbar{
+            position: fixed;
+            width: 100%;
+        }
     </style>
 
 </head>
@@ -155,37 +165,6 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <!-- User Profile-->
-                        <li class="d-none">
-                            <!-- User Profile-->
-                            <div class="user-profile d-flex no-block dropdown m-t-20">
-                                <div class="user-pic"><img src="{{asset('backend/assets/images/users/1.jpg')}}" alt="users"
-                                        class="rounded-circle" width="40" /></div>
-                                <div class="user-content hide-menu m-l-10">
-                                    <a href="#" class="" id="Userdd" role="button"
-                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <h5 class="m-b-0 user-name font-medium">Steave Jobs <i
-                                                class="fa fa-angle-down"></i></h5>
-                                        <span class="op-5 user-email">varun@gmail.com</span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="Userdd">
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-user m-r-5 m-l-5"></i> My Profile</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-wallet m-r-5 m-l-5"></i> My Balance</a>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-email m-r-5 m-l-5"></i> Inbox</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="ti-settings m-r-5 m-l-5"></i> Account Setting</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="javascript:void(0)"><i
-                                                class="fa fa-power-off m-r-5 m-l-5"></i> Logout</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End User Profile-->
-                        </li>
                         <li class="p-15 m-t-10"><a href="{{url('admin/dashboard')}}"
                                 class="btn d-block w-100 create-btn text-white no-block d-flex align-items-center"><i
                                     class="fa fa-plus-square"></i> <span class="hide-menu m-l-5">Dashboard</span> </a>
@@ -230,12 +209,20 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/setting')}}" aria-expanded="false"><i class="mdi mdi-cog"></i><span
                                     class="hide-menu">Setting</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('/')}}/storage/uploads/apk/homerevise.apk" aria-expanded="false"><i class="mdi mdi-download"></i><span
-                                    class="hide-menu">Android Apk</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                href="{{url('/')}}/storage/uploads/apk/homerevise_win.apk" aria-expanded="false"><i class="mdi mdi-download"></i><span
-                                    class="hide-menu">Window Apk</span></a></li>
+                        <li class="sidebar-item">
+                            <!-- <div class="user-content hide-menu m-l-10"> -->
+                                <a href="#" class="sidebar-link waves-effect waves-dark sidebar-link" id="Userdd" role="button"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="mdi mdi-download"></i><span class="hide-menu">Download App</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="Userdd">
+                                    <a class="dropdown-item" href="{{url('/')}}/storage/uploads/apk/homerevise.apk"><i
+                                            class="m-r-5 m-l-5"></i> Android Apk</a>
+                                    <a class="dropdown-item" href="{{url('/')}}/storage/uploads/apk/homerevise_win.apk"><i
+                                            class="m-r-5 m-l-5"></i> Window Apk</a>
+                                </div>
+                            <!-- </div> -->
+                        </li>
                     </ul>
 
                 </nav>
@@ -279,7 +266,7 @@
             return confirm(message);
         }
 
-        let table = new DataTable('table');
+        let table = new DataTable('.my_table');
 
     </script>
     

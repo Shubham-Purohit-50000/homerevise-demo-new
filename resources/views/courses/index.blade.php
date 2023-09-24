@@ -58,7 +58,7 @@
                         <!-- title -->
                     </div>
                     <div class="table-responsive">
-                        <table class="table v-middle">
+                        <table class="table v-middle my_table">
                             <thead>
                                 <tr class="bg-light">
                                     <th class="border-top-0">#ID</th>

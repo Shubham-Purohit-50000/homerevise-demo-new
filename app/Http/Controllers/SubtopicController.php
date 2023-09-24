@@ -8,10 +8,18 @@ use Illuminate\Http\Request;
 
 class SubtopicController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $subtopics = Subtopic::with('topic')->get();
-        return view('subtopics.index', compact('subtopics'));
+        $search = $request->input('search'); // Get the search input from the request
+        $query = Subtopic::with('topic');
+
+        if (!empty($search)) {
+            $query->where('heading', 'like', '%' . $search . '%');
+        }
+
+        $subtopics = $query->paginate(10); // 10 chapters per page
+
+        return view('subtopics.index', compact('subtopics', 'search'));
     }
 
     public function create()

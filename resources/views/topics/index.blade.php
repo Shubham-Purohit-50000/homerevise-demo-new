@@ -40,10 +40,18 @@
                 <div class="card">
                     <div class="card-body">
                         <!-- title -->
-                        <div class="d-md-flex">
+                        <div class="d-md-flex justify-content-between">
                             <div>
                                 <h4 class="card-title">All Topic List</h4>
                                 <h5 class="card-subtitle">Overview of all topic</h5>
+                            </div>
+                            <div>
+                                <form action="{{ route('topics.index') }}" method="GET">
+                                    <div class="form-group d-flex align-items-center">
+                                        <input type="text" class="form-control" name="search" value="{{ $search }}" placeholder="Search by Topic Name">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <!-- title -->
@@ -89,6 +97,10 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <div class="text-center">
+            {{ $topics->links() }}
         </div>
         
     </div>
