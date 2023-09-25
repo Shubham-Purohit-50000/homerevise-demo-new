@@ -63,6 +63,9 @@
             position: fixed;
             width: 100%;
         }
+        .page-breadcrumb{
+            padding: 100px 20px 0 20px;
+        }
     </style>
 
 </head>
