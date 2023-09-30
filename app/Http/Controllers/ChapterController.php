@@ -17,7 +17,7 @@ class ChapterController extends Controller
             $query->where('name', 'like', '%' . $search . '%');
         }
 
-        $chapters = $query->paginate(10); // 10 chapters per page
+        $chapters = $query->paginate(10)->appends(['search' => $search]); // 10 chapters per page
 
         return view('chapters.index', compact('chapters', 'search'));
     }

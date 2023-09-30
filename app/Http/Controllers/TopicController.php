@@ -10,17 +10,18 @@ class TopicController extends Controller
 {
     public function index(Request $request)
     {
-        $search = $request->input('search'); // Get the search input from the request
+        $search = $request->input('search');
         $query = Topic::with('chapter');
 
         if (!empty($search)) {
             $query->where('heading', 'like', '%' . $search . '%');
         }
 
-        $topics = $query->paginate(10); // 10 chapters per page
+        $topics = $query->paginate(10)->appends(['search' => $search]);
 
         return view('topics.index', compact('topics', 'search'));
     }
+
 
     public function create()
     {

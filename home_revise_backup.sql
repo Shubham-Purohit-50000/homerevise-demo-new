@@ -332,7 +332,11 @@ CREATE TABLE `settings` (
   `value` text,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+=======
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+>>>>>>> 9be13006f7bb68f5ee4c8b5d8d3746fbe6c11a97
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
