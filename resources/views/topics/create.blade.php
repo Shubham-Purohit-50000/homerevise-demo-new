@@ -57,7 +57,7 @@
                                 <label for="chapter">Select Chapter</label>
                                 <select name="chapter_id" id="chapter" class="form-control">
                                     @foreach ($chapters as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->id}}">{{$item->subject->standard->name}} | {{$item->subject->name}} | {{$item->name}}</option>
                                     @endforeach 
                                 </select>
                                 @error('chapter_id')

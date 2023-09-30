@@ -17,7 +17,7 @@ class SubtopicController extends Controller
             $query->where('heading', 'like', '%' . $search . '%');
         }
 
-        $subtopics = $query->paginate(10); // 10 chapters per page
+        $subtopics = $query->paginate(10)->appends(['search' => $search]); // 10 chapters per page
 
         return view('subtopics.index', compact('subtopics', 'search'));
     }

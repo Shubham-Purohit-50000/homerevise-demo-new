@@ -70,7 +70,6 @@
         input:focus{
         outline: 0 0 0 0  !important;
         box-shadow: 0 0 0 0 !important;
-
         }
 
         .remember{

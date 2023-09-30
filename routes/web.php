@@ -14,7 +14,6 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebsiteController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,10 +59,9 @@ Route::group(['middleware' => 'is_admin', 'prefix' => 'admin'], function () {
     Route::get('user/deregister/device/{user}', [UserController::class, 'deRegisterDevice']);
 
     Route::get('logout', [AdminController::class, 'logout']);
+
 });
 
 Route::get('privacy-policy', [WebsiteController::class, 'privacy']);
 Route::get('term-condition', [WebsiteController::class, 'term_condition']);
 Route::get('support', [WebsiteController::class, 'support']);
-
-

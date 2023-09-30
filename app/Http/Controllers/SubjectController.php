@@ -17,7 +17,7 @@ class SubjectController extends Controller
             $query->where('name', 'like', '%' . $search . '%');
         }
 
-        $subjects = $query->paginate(10); // 10 chapters per page
+        $subjects = $query->paginate(10)->appends(['search' => $search]); // 10 chapters per page
 
         return view('subjects.index', compact('subjects', 'search'));
     }
