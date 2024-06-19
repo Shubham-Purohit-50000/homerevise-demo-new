@@ -53,14 +53,41 @@
                         <h3 class="mb-3">Course Form</h3>
                         <form action="{{ url('admin/courses') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="type" value="{{$data['type']}}">
-                            <input type="hidden" name="id" value="{{$data['id']}}">
+                            {{--<input type="hidden" name="type" value="{{$data['type']}}">
+                            <input type="hidden" name="id" value="{{$data['id']}}">--}}
                             <div class="form-group">
                                 <label for="name">Course Name</label>
                                 <input type="text" name="name" class="form-control" id="name" required>
                                 @error('name')
                                 <span class="text-danger">{{$message}}</span>
                                 @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="count">Course Type</label>
+                                <select name="course_type" class="form-control" id="course_type">
+                                    <option value="" disabled selected>Select Course Type</option>
+                                    <option value="standard">Course for Standard </option>
+                                    <option value="subject">Course for Subject</option>
+                                </select>
+                                @error('count')
+                                <span class="text-danger">{{$message}}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group" id="subjects-options" >
+                                <label for="subjects">Select Subjects</label>
+                                <select id="subjects_id" class="form-control js-example-basic-multiple " name="subjects_id[]" multiple="multiple"  >
+                                    @foreach ($subjects as $item)
+                                        <option value="{{$item->id}}"> {{$item->standard->medium->name}} | {{$item->standard->name}} | {{$item->name}}</option>
+                                    @endforeach 
+                                </select>
+                            </div>
+                            <div class="form-group" id="standard-options" >
+                                <label for="standard">Select Standard</label>
+                                <select id="standard_id" class="form-control js-example-basic-multiple " name="standard_id[]" multiple="multiple"  >
+                                    @foreach ($standards as $item)
+                                        <option value="{{$item->id}}"> {{$item->medium->name}} | {{$item->name}}</option>
+                                    @endforeach 
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="count">Number of Activation keys</label>
@@ -95,7 +122,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="device_type">Device Type</label>
-                                <select name="device_type" id="device_type" class="form-control">
+                                <select name="device_type" id="device_type" name="device_type" class="form-control">
                                     <option value="mobile" selected>Mobile</option>
                                     <option value="android_box">Android Box</option>
                                 </select>
@@ -132,6 +159,26 @@
                 $('input[name="access_count"]').remove();
             }
         });
+        $('.js-example-basic-multiple').select2(); 
+        $("#subjects-options").hide();
+        $("#standard-options").hide();
+
+        $("#course_type").on("change", function(){
+            var course_type = $("#course_type").val();
+            if(course_type == "subject"){
+                $("#subjects-options").show();
+                $("#standard-options").hide();
+                $("#subjects_id").attr('required', 'required');
+                $("#standard_id").attr('required', false);
+
+            }else{
+                $("#subjects-options").hide();
+                $("#standard-options").show();
+                $("#standard_id").attr('required', 'required');
+                $("#subjects_id").attr('required', false);
+            }
+        });
+
     });
 </script>
 @endsection

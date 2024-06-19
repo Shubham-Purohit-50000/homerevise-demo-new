@@ -39,7 +39,7 @@
 
         <div class="row">
 
-            <div class="col-6 col-md-3 col-lg-2 text-center">
+           <!--  <div class="col-6 col-md-3 col-lg-2 text-center">
                 <a href="{{url('admin/states')}}">
                     <div class="card p-2">
                         <div class="card-body">
@@ -126,7 +126,7 @@
                     </div>
                 </a>
             </div>
-
+ -->
             <div class="col-6 col-md-3 col-lg-2 text-center">
                 <a href="{{url('admin/courses')}}">
                     <div class="card p-2">

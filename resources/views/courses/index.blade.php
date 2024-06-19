@@ -20,12 +20,15 @@
                 </div>
             </div>
             <div class="col-8 d-flex justify-content-end">
-                <div class="text-end upgrade-btn mx-1">
+              <!--   <div class="text-end upgrade-btn mx-1">
+                    <a href="{{url('admin/courses/create')}}" class="btn btn-success">+ Create Course </a>
+                </div> -->
+                <!-- <div class="text-end upgrade-btn mx-1">
                     <a href="{{url('admin/standards')}}" class="btn btn-success">+ Create Course For Standard</a>
                 </div>
                 <div class="text-end upgrade-btn mx-1">
                     <a href="{{url('admin/subjects')}}" class="btn btn-info text-white">+ Create Course For Subject</a>
-                </div>
+                </div> -->
             </div>
             <!-- <div class="col-4">
                 <div class="text-end upgrade-btn">
@@ -62,14 +65,14 @@
                             <thead>
                                 <tr class="bg-light">
                                     <th class="border-top-0">#ID</th>
+                                    <th class="border-top-0">Name</th>
                                     <th class="border-top-0">State</th>
                                     <th class="border-top-0">Board</th>
                                     <th class="border-top-0">Medium</th>
                                     <th class="border-top-0">Standard</th>
-                                    <th class="border-top-0">Subject</th>
-                                    <th class="border-top-0">Name</th>
+                                    <!-- <th class="border-top-0">Subject</th> -->
                                     <th class="border-top-0">Device Type</th>
-                                    <th class="border-top-0">Actication key</th>
+                                    <!-- <th class="border-top-0">Actication key</th> -->
                                     <th class="border-top-0">Status</th>
                                     <th class="border-top-0">Action</th>
                                 </tr>
@@ -77,32 +80,32 @@
                             <tbody>
                                 @foreach ($courses as $item)
                                 <tr>
-                                    @if (isset($item->standard_id))
-                                    <td>{{$item->id}}</td>
-                                    <td>{{$item->standard->medium->board->state->name}}</td>
-                                    <td>{{$item->standard->medium->board->name}}</td>
-                                    <td>{{$item->standard->medium->name}}</td>
-                                    <td>{{$item->standard->name}}</td>
-                                    <td>All</td>
-                                    <td>{{$item->name}}</td>
-                                    @endif
                                     @if(isset($item->subject_id))
                                     <td>{{$item->id}}</td>
+                                    <td>{{$item->name}}</td> 
                                     <td>{{$item->subject->standard->medium->board->state->name}}</td>
                                     <td>{{$item->subject->standard->medium->board->name}}</td>
                                     <td>{{$item->subject->standard->medium->name}}</td>
                                     <td>{{$item->subject->standard->name}}</td>
-                                    <td>{{$item->subject->name}}</td>
+                                    <!-- <td>{{$item->subject->name}}</td> -->
+                                    @else(isset($item->standard_id))
+                                    <td>{{$item->id}}</td>
                                     <td>{{$item->name}}</td>
+                                    <td>{{$item->standard->medium->board->state->name}}</td>
+                                    <td>{{$item->standard->medium->board->name}}</td>
+                                    <td>{{$item->standard->medium->name}}</td>
+                                    <td>{{$item->standard->name}}</td>
+                                    <!-- <td>All</td> -->
                                     @endif
+
                                     <td>{{$item->device_type}}
                                         @if($item->device_type == 'android_box')
                                             ({{$item->access_count}})
                                         @endif
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <a href="{{url('admin/course/activation', ['course'=>$item->id])}}" class="">{{$item->activation->count()}}</a>
-                                    </td>
+                                    </td> -->
                                     <td>
                                         @if ($item->status == 1)
                                            <span class="text-success">Active</span> 
@@ -111,6 +114,7 @@
                                         @endif
                                     </td>
                                     <td>
+                                        <a href="{{route('course.viewCourse', ['id'=>$item->id])}}"><button class="btn btn-sm btn-warning"><span class="mdi mdi-eye"></span> View</button></a>
                                         <a href="{{route('courses.edit', ['course'=>$item->id])}}"><button class="btn btn-sm btn-info"><span class="mdi mdi-pen"></span> Edit</button></a>
                                         <form action="{{ route('courses.destroy', ['course' => $item->id]) }}" method="POST" class="d-inline">
                                             @csrf

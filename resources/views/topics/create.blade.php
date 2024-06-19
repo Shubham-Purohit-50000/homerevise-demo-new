@@ -51,7 +51,7 @@
                     </div>
                     <div class="px-4 pb-4">
                         <h3 class="mb-3">Topic Form</h3>
-                        <form action="{{url('admin/topics')}}" method="POST">
+                        <form action="{{url('admin/topics')}}" method="POST"   enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="chapter">Select Chapter</label>
@@ -105,6 +105,10 @@
                                 @error('file_name')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="add_file">Add File (optional)</label>
+                                <input type="file" name="add_file" class="form-control" id="add_file"> 
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn btn-success text-white">Submit</button>

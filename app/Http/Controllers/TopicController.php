@@ -31,6 +31,14 @@ class TopicController extends Controller
 
     public function store(Request $request)
     {
+        if($request->file('add_file')){
+            $file = $request->file('add_file');
+            $path = $file->store('uploads/file', 'public');
+        
+            $url = asset('storage/' . $path);  
+    
+            $request->merge(['fileUrl' => $url]);
+        }
         $validatedData = $request->validate([
             'heading' => 'required',
             'body' => 'required',
@@ -39,6 +47,7 @@ class TopicController extends Controller
             'secondary_key' => 'required|string|max:250',
             'file_name' => 'required|string|max:250',
             'folder_name' => 'nullable|string|max:255',
+            'fileUrl' => 'nullable|string|max:255',
         ]);
 
         Topic::create($validatedData);
@@ -55,6 +64,14 @@ class TopicController extends Controller
 
     public function update(Request $request, Topic $topic)
     {
+        if($request->file('add_file')){
+            $file = $request->file('add_file');
+            $path = $file->store('uploads/file', 'public');
+        
+            $url = asset('storage/' . $path);  
+    
+            $request->merge(['fileUrl' => $url]);
+        } 
         $validatedData = $request->validate([
             'heading' => 'required',
             'body' => 'required',
@@ -62,6 +79,7 @@ class TopicController extends Controller
             'primary_key' => 'required|string|max:250',
             'secondary_key' => 'required|string|max:250',
             'file_name' => 'required|string|max:250',
+            'fileUrl' => 'nullable|string|max:255',
         ]);
 
         $topic->update($validatedData);

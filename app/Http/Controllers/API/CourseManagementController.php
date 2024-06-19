@@ -69,16 +69,28 @@ class CourseManagementController extends BaseController
                     // The course is not expired
                     $activationData['course_status'] = 'active';
                 }
+		$activationData['expiry_time'] = $expiry_date_formated;
 
-                $activationData['expiry_time'] = $expiry_date_formated;
-                $activationData['course'] = $activation->load('course.standard.subjects.chapters.topics.subtopics');
+		if(filled($activation->course->subject)){
+			$activationData['course'] = $activation->load([
+				 			 'course.standard.subjects' => function ($query) {
+		       					 $query->where('id', 33);
+   						   },
+				    'course.standard.subjects.chapters',
+    'course.standard.subjects.chapters.topics',
+    'course.standard.subjects.chapters.topics.subtopics',
+]);
+		}else{
+         //       	$activationData['expiry_time'] = $expiry_date_formated;
+                	$activationData['course'] = $activation->load('course.standard.subjects.chapters.topics.subtopics');
                 //$activation->load('course.standard.subjects.chapters.topics.subtopics');
+		}
             }
     
-            if (filled($activation->subject)) {
-                $activationData['subject'] = $activation->load('course.subject.chapters.topics.subtopics');
+   //         if (filled($activation->course->subject)) {
+     //           $activationData['course'] = $activation->load('course.subject.chapters.topics.subtopics');
                 //$activation->load('course.subject.chapters.topics.subtopics');
-            }
+       //     }
     
             // You can load more related data as needed
     

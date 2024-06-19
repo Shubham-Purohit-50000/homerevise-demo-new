@@ -60,7 +60,7 @@
                                 <label for="medium">Select Medium</label>
                                 <select name="medium_id" id="medium" class="form-control">
                                     @foreach ($mediums as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->id}}" {{($standard->medium_id == $item->id) ? "selected" : ""}}>{{$item->name}}</option>
                                     @endforeach 
                                 </select>
                                 @error('medium_id')

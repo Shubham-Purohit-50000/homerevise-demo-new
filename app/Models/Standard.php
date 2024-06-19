@@ -18,4 +18,10 @@ class Standard extends Model
     {
         return $this->hasMany(Subject::class);
     }
+
+    public function getSubjectById($subjectId)
+    {
+        // Assuming you have a relationship in Standard model to Subject model called 'subjects'
+        return $this->subjects()->find($subjectId);
+    }
 }

@@ -60,7 +60,7 @@
                                 <label for="standard">Select Standard</label>
                                 <select name="standard_id" id="standard" class="form-control">
                                     @foreach ($standards as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->id}}" {{($subject->standard_id == $item->id) ? "selected" : ""}}>{{$item->name}}</option>
                                     @endforeach 
                                 </select>
                                 @error('standard_id')

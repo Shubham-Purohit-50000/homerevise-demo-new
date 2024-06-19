@@ -1,7 +1,11 @@
 @extends('backend.layout')
 @section('title','Dashbord')
 @section('content')
-
+<style>
+    .dataTables_length,.dataTables_info ,.dataTables_paginate{
+        display: none;
+    }
+</style>
 <div class="page-wrapper">
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
@@ -21,6 +25,8 @@
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
+                    <a href="{{url('admin/subject/add-courses')}}" class="btn btn-danger text-white">+ Add Courses</a>
+                    <a href="{{url('admin/subjects/import-subject')}}" class="btn btn-danger text-white">+ Import Subject</a>
                     <a href="{{url('admin/subjects/create')}}" class="btn btn-danger text-white">+ Create Subject</a>
                 </div>
             </div>
@@ -101,6 +107,10 @@
         </div>
         
     </div>
-    
+    <script>
+    $(document).ready(function() {
+        $('.table').DataTable();
+    });
+</script>    
 </div>
 @endsection

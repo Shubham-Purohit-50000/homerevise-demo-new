@@ -52,7 +52,7 @@
                     <div class="px-4 pb-4">
                         <h3 class="mb-3">Topic Form</h3>
                         <h6 class="mb-3">Folder Name is : {{$topic->folder_name}}</h6>
-                        <form action="{{route('topics.update', ['topic'=>$topic->id])}}" method="POST">
+                        <form action="{{route('topics.update', ['topic'=>$topic->id])}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             @csrf
@@ -60,7 +60,7 @@
                                 <label for="chapter">Select Chapter</label>
                                 <select name="chapter_id" id="chapter" class="form-control">
                                     @foreach ($chapters as $item)
-                                        <option value="{{$item->id}}">{{$item->subject->standard->name}} | {{$item->subject->name}} | {{$item->name}}</option>
+                                        <option value="{{$item->id}}" {{($topic->chapter_id == $item->id) ? "selected" : ""}}>{{$item->subject->standard->name}} | {{$item->subject->name}} | {{$item->name}}</option>
                                     @endforeach 
                                 </select>
                                 @error('chapter_id')
@@ -101,6 +101,13 @@
                                 @error('file_name')
                                     <span class="text-danger">{{$message}}</span>
                                 @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="add_file">Add File (optional)</label>
+                                <input type="file" name="add_file" class="form-control" id="add_file"> 
+                                @if($topic->fileUrl)
+                                    <a href="{{$topic->fileUrl}}" target="_blank" class="btn btn-link">View File</a>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn btn-success text-white">Submit</button>

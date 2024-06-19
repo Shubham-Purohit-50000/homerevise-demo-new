@@ -59,7 +59,7 @@
                                 <label for="state">Select State</label>
                                 <select name="board_id" id="state" class="form-control">
                                     @foreach ($boards as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->id}}" {{($medium->board_id == $item->id) ? "selected" : ""}}>{{$item->name}}</option>
                                     @endforeach 
                                 </select>
                                 @error('board_id')

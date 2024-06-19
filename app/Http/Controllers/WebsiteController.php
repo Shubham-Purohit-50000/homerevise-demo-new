@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Setting;
+use App\Models\Course;
 
 class WebsiteController extends Controller
 {
@@ -42,6 +44,30 @@ class WebsiteController extends Controller
         $page = $item->Support;
 
         return view('backend.pages')->with(['title'=>$title, 'bread_curm'=>$bread_curm, 'page'=> $page]);
+    }
+
+	 public function userList(){
+            $users = User::all();
+$response = [
+            'success' => true,
+            'message' => 'Data fatch successfully',
+            'data'    =>  $users
+        ];
+
+
+        return response()->json($response, 200);
+    }
+
+ public function courseList(){
+          $courses = Course::all();
+$response = [
+            'success' => true,
+            'message' => 'Data fatch successfully',
+            'data'    =>  $courses 
+        ];
+
+
+        return response()->json($response, 200);
     }
 
 }

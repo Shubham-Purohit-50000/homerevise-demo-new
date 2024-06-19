@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\CourseManagementController;
-
+use App\Http\Controllers\API\QuizController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,6 +16,8 @@ use App\Http\Controllers\API\CourseManagementController;
 |
 */
 
+Route::get('user/list',[\App\Http\Controllers\WebsiteController::class,"userList"]);
+Route::get('course/list',[\App\Http\Controllers\WebsiteController::class,"courseList"]);
 Route::get('pre-login/details', [CourseManagementController::class, 'prelogin']);
 
 Route::controller(RegisterController::class)->group(function(){
@@ -35,7 +37,12 @@ Route::middleware(['auth:sanctum'])->group( function () {
     Route::post('user/update/profile', [RegisterController::class, 'updateProfile']);
     Route::get('user/logout', [RegisterController::class, 'logout']);
     Route::get('device/de-register', [RegisterController::class, 'de_register_device']);
+    Route::post('user/get/quiz', [QuizController::class, 'getQuiz']);
+    Route::post('user/submit/quiz', [QuizController::class, 'submitQuiz']);
+    Route::post('user/get/analytics', [QuizController::class, 'getAnalytics']);
+
 });
+
 
 //for unauthorize user
 Route::get('login', function () {

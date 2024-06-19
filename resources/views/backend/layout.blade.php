@@ -18,7 +18,9 @@
     <!-- Custom CSS -->
     <link href="{{asset('backend/dist/css/style.min.css')}}" rel="stylesheet">
     <!-- JQUERY CDN-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
 
     <!-- cdn for toaster -->
     <!-- CSS -->
@@ -37,6 +39,10 @@
     <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> 
 
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> 
+
     @if(!auth('admin')->check())
     <style>
         #main-wrapper[data-layout=vertical][data-sidebartype=full] .page-wrapper{
@@ -46,6 +52,10 @@
     @endif
 
     <style>
+        .page-wrapper {
+            background: #ffffff!important;
+            position: relative;
+        }
         .table-responsive{
             padding: 0px 20px!important;
         }
@@ -65,6 +75,14 @@
         }
         .page-breadcrumb{
             padding: 100px 20px 0 20px;
+        }
+        @media only screen and (max-width: 768px) {
+            .row{
+                display:block;
+            }
+            .col-6, .col-8, .col-sm-4, .col-sm-6{
+                width:100%;
+            }
         }
     </style>
 
@@ -168,10 +186,10 @@
                 <!-- Sidebar navigation-->
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li class="p-15 m-t-10"><a href="{{url('admin/dashboard')}}"
+                       <!--  <li class="p-15 m-t-10"><a href="{{url('admin/dashboard')}}"
                                 class="btn d-block w-100 create-btn text-white no-block d-flex align-items-center"><i
                                     class="fa fa-plus-square"></i> <span class="hide-menu m-l-5">Dashboard</span> </a>
-                        </li>
+                        </li> -->
                         <!-- User Profile-->
                         <li class="sidebar-item d-none"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/dashboard')}}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span
@@ -179,7 +197,7 @@
                         <!-- <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/user')}}" aria-expanded="false"><i
                                     class="mdi mdi-account-network"></i><span class="hide-menu">Users</span></a></li> -->
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                      <!--   <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/states')}}" aria-expanded="false"><i class="mdi mdi-web"></i><span
                                     class="hide-menu">States</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -190,8 +208,8 @@
                                     class="hide-menu">Mediums</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/standards')}}" aria-expanded="false"><i class="mdi mdi-translate-variant"></i><span
-                                    class="hide-menu">Standards</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    class="hide-menu">Standards</span></a></li> -->
+                     <!--    <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/subjects')}}" aria-expanded="false"><i class="mdi mdi-layers"></i><span
                                     class="hide-menu">Subjects</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -199,22 +217,31 @@
                                     class="hide-menu">Chapters</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/topics')}}" aria-expanded="false"><i class="mdi mdi-file"></i><span
-                                    class="hide-menu">Topics</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    class="hide-menu">Topics</span></a></li> -->
+                      <!--   <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/subtopics')}}" aria-expanded="false"><i class="mdi mdi-newspaper-variant"></i><span
                                     class="hide-menu">SubTopics</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/questions')}}" aria-expanded="false"><i class="mdi mdi-file-document-box"></i><span
+                                    class="hide-menu">Questions</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/quizes')}}" aria-expanded="false"><i class="mdi mdi-file-document"></i><span
+                                    class="hide-menu">Quiz</span></a></li> -->
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/courses')}}" aria-expanded="false"><i class="mdi mdi-bag-personal"></i><span
                                     class="hide-menu">Course Key Generation</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/users')}}" aria-expanded="false"><i class="mdi mdi-account"></i><span
                                     class="hide-menu">Users</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                      <!--   <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                 href="{{url('admin/setting')}}" aria-expanded="false"><i class="mdi mdi-cog"></i><span
                                     class="hide-menu">Setting</span></a></li>
-                        <li class="sidebar-item">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                href="{{url('admin/tools')}}" aria-expanded="false"><i class="mdi mdi-cogs"></i><span
+                                    class="hide-menu">Tools</span></a></li>
+                        <li class="sidebar-item"> -->
                             <!-- <div class="user-content hide-menu m-l-10"> -->
-                                <a href="#" class="sidebar-link waves-effect waves-dark sidebar-link" id="Userdd" role="button"
+                                <!-- <a href="#" class="sidebar-link waves-effect waves-dark sidebar-link" id="Userdd" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="mdi mdi-download"></i><span class="hide-menu">Download App</span>
                                 </a>
@@ -223,7 +250,7 @@
                                             class="m-r-5 m-l-5"></i> Android Apk</a>
                                     <a class="dropdown-item" href="{{url('/')}}/storage/uploads/apk/homerevise_win.apk"><i
                                             class="m-r-5 m-l-5"></i> Window Apk</a>
-                                </div>
+                                </div> -->
                             <!-- </div> -->
                         </li>
                     </ul>
@@ -244,6 +271,9 @@
         <!-- ============================================================== -->
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
+    </div>
+    <div class="footer text-center">
+        Design and developed by <a href="https://www.linkedin.com/in/itsvnp/" target="_blank">Team Vivekananda</a>.
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -272,7 +302,7 @@
         let table = new DataTable('.my_table');
 
     </script>
-    
+
     <script src="{{asset('backend/assets/libs/jquery/dist/jquery.min.js')}}"></script>
     <!-- Bootstrap tether Core JavaScript -->
     <script src="{{asset('backend/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
@@ -284,6 +314,10 @@
     <!--Custom JavaScript -->
     <script src="{{asset('backend/dist/js/custom.js')}}"></script>
     <!--This page JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
 </body>
 
 </html>

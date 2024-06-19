@@ -188,5 +188,57 @@ class AdminController extends Controller
         return response()->json(['message' => 'No file uploaded'], 400);
     }
 
+    public function updateTvApk(Request $request)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'file' => 'required', // Adjust the file size limit as needed (in KB)
+        ]);
 
+        // Check if a file was uploaded
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+
+            // Store the file with the desired name
+            $fileName = 'homerevise_tv.apk';
+            $file->storeAs('uploads/apk', $fileName, 'public'); // 'uploads' is the storage folder name
+
+            // You can also store the file path in the database if needed
+            // For example, if you have a 'files' table with a 'path' column:
+            // File::create(['path' => 'uploads/' . $fileName]);
+
+            // Optionally, you can return a success response
+            return response()->json(['message' => 'File uploaded successfully']);
+        }
+
+        // Handle the case where no file was uploaded
+        return response()->json(['message' => 'No file uploaded'], 400);
+    }
+
+    public function tools(){
+
+        return view('backend.tools');
+    }
+
+    public function uploadImage(Request $request){
+        // Validate the uploaded file
+        $request->validate([
+            'file' => 'required', 
+            'name' => 'required', 
+        ]);
+ 
+        if ($request->hasFile('file')) {
+            $file = $request->file('file'); 
+            $fileName = $request->name;
+            
+            $filePath = 'uploads/other/images/' . $fileName;
+            $file->storeAs('uploads/other/images/', $fileName, 'public');
+
+            $imageUrl = asset('storage/' . $filePath);
+            
+            return response()->json(['message' => 'File uploaded successfully','data' => $imageUrl]);
+        }
+ 
+        return response()->json(['message' => 'No file uploaded'], 400);
+    }
 }

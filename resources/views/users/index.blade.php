@@ -19,11 +19,11 @@
                     </nav>
                 </div>
             </div>
-            <div class="col-7">
+          <!--   <div class="col-7">
                 <div class="text-end upgrade-btn">
                     <a href="{{url('admin/users/create')}}" class="btn btn-danger text-white">+ Create User</a>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!-- ============================================================== -->

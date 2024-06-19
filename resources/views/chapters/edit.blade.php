@@ -59,7 +59,7 @@
                                 <label for="subject">Select Standard</label>
                                 <select name="subject_id" id="subject" class="form-control">
                                     @foreach ($subjects as $item)
-                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                    <option value="{{$item->id}}" {{($chapter->subject_id == $item->id) ? "selected" : ""}}>{{$item->name}}</option>
                                     @endforeach 
                                 </select>
                                 @error('subject_id')

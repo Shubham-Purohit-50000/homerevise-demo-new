@@ -1,7 +1,11 @@
 @extends('backend.layout')
 @section('title','Dashbord')
 @section('content')
-
+<style>
+    .dataTables_length,.dataTables_info ,.dataTables_paginate{
+        display: none;
+    }
+</style>
 <div class="page-wrapper">
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
@@ -21,6 +25,7 @@
             </div>
             <div class="col-7">
                 <div class="text-end upgrade-btn">
+                    <a href="{{url('admin/chapters/import-chapter')}}" class="btn btn-danger text-white">+ Import Subject</a>
                     <a href="{{url('admin/chapters/create')}}" class="btn btn-danger text-white">+ Create Chapter</a>
                 </div>
             </div>
@@ -46,18 +51,18 @@
                                 <h5 class="card-subtitle">Overview of all chapter</h5>
                             </div>
                             <div>
-                                <form action="{{ route('chapters.index') }}" method="GET">
+                               <!-- <form action="{{ route('chapters.index') }}" method="GET">
                                     <div class="form-group d-flex align-items-center">
-                                        <input type="text" class="form-control" name="search" value="{{ $search }}" placeholder="Search by Chapter Name">
+                                        <input type="text" class="form-control" name="search" value="" placeholder="Search by Chapter Name">
                                         <button type="submit" class="btn btn-primary">Search</button>
                                     </div>
-                                </form>
+                                </form> -->
                             </div>
                         </div>
                         <!-- title -->
                     </div>
                     <div class="table-responsive">
-                        <table class="table v-middle">
+                        <table class="table my_table v-middle">
                             <thead>
                                 <tr class="bg-light">
                                     <th class="border-top-0">#ID</th>
@@ -102,6 +107,10 @@
         </div>
         
     </div>
-    
+    <script>
+  
+  
+
+</script>
 </div>
 @endsection

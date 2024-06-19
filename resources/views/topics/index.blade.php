@@ -1,7 +1,11 @@
 @extends('backend.layout')
 @section('title','Dashbord')
 @section('content')
-
+<style>
+    .dataTables_length,.dataTables_info ,.dataTables_paginate{
+        display: none;
+    }
+</style>
 <div class="page-wrapper">
     <!-- ============================================================== -->
     <!-- Bread crumb and right sidebar toggle -->
@@ -104,6 +108,10 @@
         </div>
         
     </div>
-    
+    <script>
+    $(document).ready(function() {
+        $('.table').DataTable();
+    });
+</script>    
 </div>
 @endsection

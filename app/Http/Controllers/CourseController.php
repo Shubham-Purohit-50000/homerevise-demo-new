@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Subject;
+use App\Models\Standard;
 use App\Models\Activation;
 use Illuminate\Support\Str;
 
@@ -15,24 +17,30 @@ class CourseController extends Controller
         return view('courses.index', compact('courses'));
     }
 
-    public function create($type, $id)
+//    public function create($type, $id)
+     public function create()
     {
-        $data['type'] = $type;
-        $data['id'] = $id;
+//        $data['type'] = $type;
+ //       $data['id'] = $id;
         
         // You can load data for dropdowns like standards and subjects here
-        return view('courses.create', compact('data'));
+   //     return view('courses.create', compact('data'));
+
+        $subjects = Subject::all();
+        $standards = Standard::all();
+        return view('courses.create',compact('subjects','standards'));
+    }
+
+    public function viewCourse($id){
+        $courses = Course::findOrFail($id);
+        $coursesByName = Course::where('name','=',$courses->name)->get();
+        
+        return view('courses.view', compact('coursesByName'));
     }
 
     public function store(Request $request)
-    {
+    { 
         
-        if ($request->type == 'subject') {
-            $request->merge(['subject_id' => $request->id]);
-        } elseif ($request->type == 'standard') {
-            $request->merge(['standard_id' => $request->id]);
-        }
-
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'folder_name' => 'nullable|string|max:255',
@@ -40,29 +48,132 @@ class CourseController extends Controller
             'count' => 'required|numeric',
             'status' => 'required|numeric',
         ]);
+       // $activationKey = 'HR'.generateRandomString(6);
 
-        $course = Course::create($request->all());
-
-        for($i = 0; $i < $request->count; $i++){
-
-            // Generate a unique 10-digit activation key
-            $activationKey = 'HR'.generateRandomString(6);
-
-            // Check if the generated key already exists in the activations table
-            while (Activation::where('activation_key', $activationKey)->exists()) {
-                // If it exists, generate a new key and check again
+                if($request->course_type == "standard"){
+            foreach($request->standard_id as $standard){
+                $course = new Course; 
+                $course->name = $request->name;
+                $course->standard_id =$standard;
+                $course->duration =$request->duration;
+                $course->status =$request->status;
+                $course->device_type =$request->device_type;
+                $course->folder_name =$request->folder_name;
+                $course->access_count =$request->count;
+                $course->save();
                 $activationKey = 'HR'.generateRandomString(6);
-            }
 
-            Activation::create([
-                'course_id' => $course->id,
-                'activation_key' => $activationKey,
-            ]);
+                for($i = 0; $i < $request->count -1; $i++){
+                    // Check if the generated key already exists in the activations table
+                    while (Activation::where('activation_key', $activationKey)->exists()) {
+                        // If it exists, generate a new key and check again
+                        $activationKey = 'HR'.generateRandomString(6);
+                    }
+        
+                    Activation::create([
+                        'course_id' => $course->id,
+                        'activation_key' => $activationKey,
+                    ]);
+                }
+
+                Activation::create([
+                    'course_id' => $course->id,
+                    'activation_key' => $activationKey,
+                ]);
+            }
+        }elseif($request->course_type == "subject"){
+            foreach($request->subjects_id as $subject){
+                $course = new Course; 
+                $course->name = $request->name;
+                $course->subject_id =$subject;
+                $course->duration =$request->duration;
+                $course->status =$request->status;
+                $course->device_type =$request->device_type;
+                $course->folder_name =$request->folder_name;
+                $course->access_count =$request->count;
+                $course->save();
+                $activationKey = 'HR'.generateRandomString(6);
+
+                for($i = 0; $i < $request->count -1; $i++){
+                    // Check if the generated key already exists in the activations table
+                    while (Activation::where('activation_key', $activationKey)->exists()) {
+                        // If it exists, generate a new key and check again
+                        $activationKey = 'HR'.generateRandomString(6);
+                    }
+        
+                    Activation::create([
+                        'course_id' => $course->id,
+                        'activation_key' => $activationKey,
+                    ]);
+                }
+
+                Activation::create([
+                    'course_id' => $course->id,
+                    'activation_key' => $activationKey,
+                ]);
+            }
         }
+        // if ($request->type == 'subject') {
+        //     $request->merge(['subject_id' => $request->id]);
+        //     $standard_id = Standard::findOrFail(Subject::findOrFail($request->id)->standard_id); 
+        //     $request->merge(['standard_id' => $standard_id->id]);
+        // } elseif ($request->type == 'standard') {
+        //     $request->merge(['standard_id' => $request->id]);
+        // } elseif ($request->type == 'multiple_subject') {
+
+        //     foreach($request->subjects_id as $subjectId){ 
+        //         $request->merge(['subject_id' => $subjectId]);
+        //         $standard_id = Standard::findOrFail(Subject::findOrFail($subjectId)->standard_id); 
+        //         $request->merge(['standard_id' => $standard_id->id]);
+
+        //         $course = Course::create($request->all());
+
+        //         for($i = 0; $i < $request->count; $i++){
+        
+        //             // Generate a unique 10-digit activation key
+        //             $activationKey = 'HR'.generateRandomString(6);
+        
+        //             // Check if the generated key already exists in the activations table
+        //             while (Activation::where('activation_key', $activationKey)->exists()) {
+        //                 // If it exists, generate a new key and check again
+        //                 $activationKey = 'HR'.generateRandomString(6);
+        //             }
+        
+        //             Activation::create([
+        //                 'course_id' => $course->id,
+        //                 'activation_key' => $activationKey,
+        //             ]);
+        //         }        
+        //     }
+
+        //     return redirect()->route('courses.index')
+        //     ->with('success', 'Course created successfully.');
+        // }
+ 
+
+        // $course = Course::create($request->all());
+
+        // for($i = 0; $i < $request->count; $i++){
+
+        //     // Generate a unique 10-digit activation key
+        //     $activationKey = 'HR'.generateRandomString(6);
+
+        //     // Check if the generated key already exists in the activations table
+        //     while (Activation::where('activation_key', $activationKey)->exists()) {
+        //         // If it exists, generate a new key and check again
+        //         $activationKey = 'HR'.generateRandomString(6);
+        //     }
+
+        //     Activation::create([
+        //         'course_id' => $course->id,
+        //         'activation_key' => $activationKey,
+        //     ]);
+        // }
 
         return redirect()->route('courses.index')
             ->with('success', 'Course created successfully.');
     }
+
 
     public function show(Course $course)
     {
@@ -82,7 +193,8 @@ class CourseController extends Controller
             'duration' => 'required|numeric',
             'status' => 'required|numeric',
         ]);
-
+        $course->standard_id  = $course->standard_id ? $course->standard_id : Standard::findOrFail(Subject::findOrFail($course->subject_id)->standard_id)->id; 
+        
         $course->update($validatedData);
 
         return redirect()->route('courses.index')
